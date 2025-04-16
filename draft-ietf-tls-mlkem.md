@@ -281,9 +281,9 @@ encapsulation keys and ciphertexts that fall within the TLS constraints.
 Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
 probability of failure, meaning two honest parties may derive different
 shared secrets.  This would cause a handshake failure. ML-KEM has a
-cryptographically small failure rate less than 2^-138; implementers should
-be aware of the potential of handshake failure. Clients can retry if a
-failure is encountered.
+cryptographically small failure rate less than 2^-138; implementers should be
+aware of the potential of handshake failure. Clients can retry if a failure
+is encountered.
 
 # Security Considerations {#security-considerations}
 
@@ -357,9 +357,9 @@ agreement. These computational binding properties for KEMs were formalized in
 
 # IANA Considerations
 
-This document requests/registers three new entries to the TLS Named Group
-(or Supported Group) registry, according to the procedures in {{Section
-6 of tlsiana}}.
+This document requests/registers three new entries to the TLS Named Group (or
+Supported Group) registry, according to the procedures in {{Section 6 of
+tlsiana}}.
 
 
  Value:
