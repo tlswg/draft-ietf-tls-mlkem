@@ -4,12 +4,12 @@
 
 Transport Layer Security                                     D. Connolly
 Internet-Draft                                                 SandboxAQ
-Intended status: Informational                           5 November 2024
-Expires: 9 May 2025
+Intended status: Informational                             16 April 2025
+Expires: 18 October 2025
 
 
              ML-KEM Post-Quantum Key Agreement for TLS 1.3
-             draft-connolly-tls-mlkem-key-agreement-latest
+                      draft-ietf-tls-mlkem-latest
 
 Abstract
 
@@ -22,8 +22,7 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-connolly-tls-mlkem-key-
-   agreement/.
+   https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/.
 
    Discussion of this document takes place on the Transport Layer
    Security Working Group mailing list (mailto:tls@ietf.org), which is
@@ -31,7 +30,7 @@ About This Document
    at https://www.ietf.org/mailman/listinfo/tls/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/dconnolly/draft-connolly-tls-mlkem-key-agreement.
+   https://github.com/tlswg/draft-ietf-tls-mlkem.
 
 Status of This Memo
 
@@ -48,11 +47,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2025.
+   This Internet-Draft will expire on 18 October 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -264,9 +263,9 @@ Table of Contents
    Some post-quantum key exchange algorithms, including ML-KEM, have
    non-zero probability of failure, meaning two honest parties may
    derive different shared secrets.  This would cause a handshake
-   failure.  ML-KEM has a cryptographically small failure rate;
-   implementers should be aware of the potential of handshake failure.
-   Clients can retry if a failure is encountered.
+   failure.  ML-KEM has a cryptographically small failure rate less than
+   2^-138; implementers should be aware of the potential of handshake
+   failure.  Clients can retry if a failure is encountered.
 
 6.  Security Considerations
 
@@ -388,9 +387,9 @@ Table of Contents
 
 8.1.  Normative References
 
-   [FIPS203]  "Module-Lattice-Based Key-Encapsulation Mechanism
-              Standard", National Institute of Standards and Technology,
-              DOI 10.6028/nist.fips.203, August 2024,
+   [FIPS203]  "Module-lattice-based key-encapsulation mechanism
+              standard", National Institute of Standards and Technology
+              (U.S.), DOI 10.6028/nist.fips.203, August 2024,
               <https://doi.org/10.6028/nist.fips.203>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -445,9 +444,9 @@ Table of Contents
 
    [hybrid]   Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
               exchange in TLS 1.3", Work in Progress, Internet-Draft,
-              draft-ietf-tls-hybrid-design-11, 7 October 2024,
+              draft-ietf-tls-hybrid-design-12, 14 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              hybrid-design-11>.
+              hybrid-design-12>.
 
    [LUCKY13]  Al Fardan, N. J. and K. G. Paterson, "Lucky Thirteen:
               Breaking the TLS and DTLS record protocols", n.d.,
@@ -461,9 +460,9 @@ Table of Contents
 
    [tlsiana]  Salowey, J. A. and S. Turner, "IANA Registry Updates for
               TLS and DTLS", Work in Progress, Internet-Draft, draft-
-              ietf-tls-rfc8447bis-10, 3 November 2024,
+              ietf-tls-rfc8447bis-12, 11 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              rfc8447bis-10>.
+              rfc8447bis-12>.
 
 Acknowledgments
 
