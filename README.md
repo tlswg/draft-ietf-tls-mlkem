@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "ML-KEM Post-Quantum Key Agreement for TLS 1.3".
 
-* [Editor's Copy](https://dconnolly.github.io/draft-connolly-tls-kems/#go.draft-connolly-tls-mlkem-key-exchange.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-connolly-tls-mlkem-key-exchange)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-connolly-tls-mlkem-key-exchange)
-* [Compare Editor's Copy to Individual Draft](https://dconnolly.github.io/draft-connolly-tls-mlkem-key-exchange/#go.draft-connolly-tls-mlkem-key-exchange.diff)
+* [Editor's Copy](https://tlswg.github.io/draft-ietf-tls-mlkem/#go.draft-ietf-tls-mlkem.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-tls-mlkem)
+* [Compare Editor's Copy to Individual Draft](https://tlswg.github.io/draft-ietf-tls-mlkem/#go.draft-ietf-tls-mlkem.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/dconnolly/draft-connolly-tls-mlkem-key-exchange/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/tlswg/draft-ietf-tls-mlkem/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.

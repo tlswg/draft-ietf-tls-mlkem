@@ -1,9 +1,9 @@
 ---
 title: "ML-KEM Post-Quantum Key Agreement for TLS 1.3"
-abbrev: connolly-tls-mlkem-key-agreement
+abbrev: ietf-tls-mlkem
 category: info
 
-docname: draft-connolly-tls-mlkem-key-agreement-latest
+docname: draft-ietf-tls-mlkem-latest
 submissiontype: IETF
 number:
 date:
@@ -20,7 +20,7 @@ venue:
   type: "Working Group"
   mail: "tls@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/tls/"
-  github: "dconnolly/draft-connolly-tls-mlkem-key-agreement"
+  github: "tlswg/draft-ietf-tls-mlkem"
 
 author:
  -
