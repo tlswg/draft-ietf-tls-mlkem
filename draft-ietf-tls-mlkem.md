@@ -73,6 +73,7 @@ informative:
   HHK: DOI.10.1007/978-3-319-70500-2_12
   HPKE: RFC9180
   hybrid: I-D.ietf-tls-hybrid-design
+  mlkemhybrid: I-D.ietf-tls-ecdhe-mlkem
   LUCKY13:
     target: https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf
     title: "Lucky Thirteen: Breaking the TLS and DTLS record protocols"
@@ -113,9 +114,24 @@ This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
 
 FIPS 203 standard (ML-KEM) is a new FIPS standard for post-quantum
 key agreement via lattice-based key establishment mechanism
-(KEM). Having a fully post-quantum (not hybrid) key agreement
-option for TLS 1.3 is necessary for migrating beyond hybrids and
-for users that need to be fully post-quantum.
+(KEM). As such, there has been significant interest in using ML-KEM in TLS 1.3.
+
+As any cryptographic algorithm can potentially be broken due to advancements in cryptanalysis,
+new key agreement methods should generally be combined with an existing method.
+This ensures security as long as one key agreement method retains its security.
+Post-quantum hybrids for ML-KEM are specified in {{mlkemhybrid}}.
+
+However, various requirements such as compliance or implementation
+considerations may demand that ML-KEM be implemented in a non-hybrid fashion.
+
+To enable interoperability for such deployments, this document specifies code
+points and encodings for deployments of non-hybrid ML-KEM. The code points are
+registered as `discouraged`, and should only be available in environments where
+a hybrid deployment with ephemeral Diffie-Hellman is not possible, or not
+desirable. See the security considerations below.
+
+As confidence in the security of post-quantum key agreements rises, the IETF
+might consider changing the recommendation status.
 
 # Conventions and Definitions
 
@@ -339,6 +355,30 @@ key abides by any bounds in the specification of the KEM or subsequent
 security analyses.  Implementations MUST NOT reuse randomness in the
 generation of KEM ciphertexts.
 
+## Non-Hybrid Key Exchange
+
+Omission of a fallback key exchange such as ephemeral Diffie-Hellman not only
+requires continuous assessment of potential new threats to the scheme's
+security, but runs the risk of store-now-decrypt-later attacks.
+For instance, SIKE has been broken after a significant amount of review, and
+after being used to encrypt user data. {{mlkemhybrid}} can provide some
+security even in the case of a cryptographic failure of one key agreement
+method.
+
+Furthermore, for the typical user, the additional cost of supporting e.g. X25519
+is not a significant factor for performance, code size, or bandwidth, if ML-KEM
+is only used as part of TLS, which itself is used as part of an application.
+
+Therefore, the non-hybrid version of ML-KEM MUST NOT be used unless one of the
+following applies:
+
+- Compliance with regulations demands the use of non-hybrid ML-KEM.
+- Severely restricted computational resources make the use of a hybrid key
+  exchange undesirable.
+
+Absent such considerations, implementers SHOULD consider implementing
+{{mlkemhybrid}} instead.
+
 ## Binding properties
 
 TLS 1.3's key schedule commits to the the ML-KEM encapsulation key and the
@@ -372,13 +412,14 @@ tlsiana}}.
  : Y
 
  Recommended:
- : N
+ : D
 
  Reference:
  : This document
 
  Comment:
- : FIPS 203 version of ML-KEM-512
+ : FIPS 203 version of ML-KEM-512. Absent specific considerations, hybrid key
+ exchanges are to be preferred.
 
 
 
@@ -392,13 +433,15 @@ tlsiana}}.
  : Y
 
  Recommended:
- : N
+ : D
 
  Reference:
  : This document
 
  Comment:
- : FIPS 203 version of ML-KEM-768
+ : FIPS 203 version of ML-KEM-768. Absent specific considerations, hybrid key
+ exchanges are to be preferred.
+
 
 
 
@@ -412,13 +455,15 @@ tlsiana}}.
  : Y
 
  Recommended:
- : N
+ : D
 
  Reference:
  : This document
 
  Comment:
- : FIPS 203 version of ML-KEM-1024
+ : FIPS 203 version of ML-KEM-1024. Absent specific considerations, hybrid key
+ exchanges are to be preferred.
+
 
 
 --- back
