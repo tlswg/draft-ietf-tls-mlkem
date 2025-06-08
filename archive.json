@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-17T00:24:03.508055+00:00",
+  "timestamp": "2025-06-08T01:54:16.813655+00:00",
   "repo": "tlswg/draft-ietf-tls-mlkem",
   "labels": [
     {
@@ -205,6 +205,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOLZWQXM6ZXfA-",
+      "title": "Change recommended to D",
+      "url": "https://github.com/tlswg/draft-ietf-tls-mlkem/pull/6",
+      "state": "OPEN",
+      "author": "bellebaum",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR is an attempt to strike a balance between\r\n\r\n- those who would like to deploy ML-KEM as a non-hybrid, and\r\n- those who believe that a non-hybrid is not the best choice for the average user.\r\n\r\nIn essence, it leaves the code point registrations (for interop), but clarifies that the choice to deploy a non-hybrid should only be taken in acknowledgement of the possible risks involved.\r\n\r\nThis is done first and foremost by setting the recommended column in the IANA registration to `D`iscouraged.\r\n\r\nAccording to [draft-ietf-tls-rfc8447bis](https://datatracker.ietf.org/doc/draft-ietf-tls-rfc8447bis/):\r\n\r\n> D:  Indicates that the item is discouraged.  This marking could be\r\n      used to identify mechanisms that might result in problems if they\r\n      are used, such as a weak cryptographic algorithm or a mechanism\r\n      that might cause interoperability problems in deployment.  When\r\n      marking a registry entry as \u201cD\u201d, either the References or the\r\n      Comments Column MUST include sufficient information to determine\r\n      why the marking has been applied.  Implementers and users SHOULD\r\n      consult the linked references associated with the item to\r\n      determine the conditions under which the item SHOULD NOT or MUST\r\n      NOT be used.\r\n\r\nPerhaps taking `could` a bit too seriously for the original intent, the last sentence is exactly the mechanism this PR wishes to leverage. The security considerations have been extended by (the beginnings of; Please extend this!) a section about non-hybrids, and this section is intended to highlight and explain the use cases in which a non-hybrid might be a good fit.\r\n\r\nI have also made some changes to the motivation, to explain the `D` column early in the document.\r\n\r\nGoes without saying, but everything here is up for discussion :)",
+      "createdAt": "2025-06-06T10:09:21Z",
+      "updatedAt": "2025-06-06T10:09:21Z",
+      "baseRepository": "tlswg/draft-ietf-tls-mlkem",
+      "baseRefName": "main",
+      "baseRefOid": "61a8fdf89c20a1e43970559b04b055e5288cb100",
+      "headRepository": "bellebaum/draft-ietf-tls-mlkem",
+      "headRefName": "main",
+      "headRefOid": "e879008884214e5f635f4f46030b653891fe4f83",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
