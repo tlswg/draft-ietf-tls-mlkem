@@ -29,7 +29,6 @@ author:
     email: durumcrustulum@gmail.com
 
 normative:
-  RFC9180:
   FIPS203: DOI.10.6028/NIST.FIPS.203
 
 informative:
