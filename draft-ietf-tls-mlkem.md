@@ -297,17 +297,6 @@ be treated as a long-term key or reused.  A common design pattern for
 obtaining security under key reuse is to apply the Fujisaki-Okamoto (FO)
 transform {{FO}} or a variant thereof {{HHK}}.
 
-Key exchange in TLS 1.3 is phrased in terms of Diffie-Hellman key exchange in
-a group.  DH key exchange can be modeled as a KEM, with `KeyGen`
-corresponding to selecting an exponent `x` as the secret key and computing
-the public key `g^x`; encapsulation corresponding to selecting an exponent
-`y`, computing the ciphertext `g^y` and the shared secret `g^(xy)`, and
-decapsulation as computing the shared secret `g^(xy)`. See {{HPKE}} for more
-details of such Diffie-Hellman-based key encapsulation
-mechanisms. Diffie-Hellman key exchange, when viewed as a KEM, does not
-formally satisfy IND-CCA2 security, but is still safe to use for ephemeral
-key exchange in TLS 1.3, see e.g. {{DOWLING}}.
-
 TLS 1.3 does not require that ephemeral public keys be used only in a single
 key exchange session; some implementations may reuse them, at the cost of
 limited forward secrecy.  As a result, any KEM used in the manner described
