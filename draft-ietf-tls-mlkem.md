@@ -264,8 +264,6 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 ~~~~
 {: #fig-key-schedule title="Key schedule for key agreement"}
 
-# Discussion {#discussion}
-
 # Security Considerations {#security-considerations}
 
 ## IND-CCA
