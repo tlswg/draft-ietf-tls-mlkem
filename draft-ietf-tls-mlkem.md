@@ -292,23 +292,23 @@ chosen ciphertext attack (IND-CCA2), which means that shared secret values
 should be indistinguishable from random strings even given the ability to
 have other arbitrary ciphertexts decapsulated.  IND-CCA2 corresponds to
 security against an active attacker, and the public key / secret key pair can
-be treated as a long-term key or reused.  A common design pattern for
-obtaining security under key reuse is to apply the Fujisaki-Okamoto (FO)
-transform {{FO}} or a variant thereof {{HHK}}.
+be treated as a long-term key or reused.
 
 TLS 1.3 does not require that ephemeral public keys be used only in a single
 key exchange session; some implementations may reuse them, at the cost of
-limited forward secrecy.  As a result, any KEM used in the manner described
-in this document MUST explicitly be designed to be secure in the event that
-the public key is reused.  Finite-field and elliptic-curve Diffie-Hellman key
-exchange methods used in TLS 1.3 satisfy this criteria.  For generic KEMs,
+limited forward secrecy. As a result, any KEM used in the manner described in
+this document MUST explicitly be designed to be secure in the event that the
+public key is reused. Finite-field and elliptic-curve Diffie-Hellman key
+exchange methods used in TLS 1.3 satisfy this criteria. For generic KEMs,
 this means satisfying IND-CCA2 security or having a transform like the
-Fujisaki-Okamoto transform {{FO}} {{HHK}} applied.  While it is recommended
-that implementations avoid reuse of KEM public keys, implementations that do
-reuse KEM public keys MUST ensure that the number of reuses of a KEM public
-key abides by any bounds in the specification of the KEM or subsequent
-security analyses.  Implementations MUST NOT reuse randomness in the
-generation of KEM ciphertexts.
+Fujisaki-Okamoto transform {{FO}} {{HHK}} applied. ML-KEM satisfies this
+requirement {{FIPS203}}.
+
+While it is recommended that implementations avoid reuse of KEM public keys,
+implementations that do reuse KEM public keys MUST ensure that the number of
+reuses of a KEM public key abides by any bounds in the specification of the
+KEM or subsequent security analyses.  Implementations MUST NOT reuse
+randomness in the generation of KEM ciphertexts.
 
 ## Binding properties
 
