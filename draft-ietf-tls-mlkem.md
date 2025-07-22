@@ -266,13 +266,6 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 
 # Discussion {#discussion}
 
-## Larger encapsulation keys and/or ciphertexts
-
-The `KeyShareEntry` struct limits public keys and ciphertexts to 2^16-1
-bytes; this is the (2^16-1)-byte limit on the `key_exchange` field in the
-`KeyShareEntry` struct. All defined parameter sets for ML-KEM have
-encapsulation keys and ciphertexts that fall within the TLS constraints.
-
 ## Failures
 
 Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
