@@ -304,11 +304,9 @@ this means satisfying IND-CCA2 security or having a transform like the
 Fujisaki-Okamoto transform {{FO}} {{HHK}} applied. ML-KEM satisfies this
 requirement {{FIPS203}}.
 
-While it is recommended that implementations avoid reuse of KEM public keys,
-implementations that do reuse KEM public keys MUST ensure that the number of
-reuses of a KEM public key abides by any bounds in the specification of the
-KEM or subsequent security analyses.  Implementations MUST NOT reuse
-randomness in the generation of KEM ciphertexts.
+Along with other TLS 1.3 key agreement methods, it is recommended that
+implementations avoid reuse of ML-KEM keys. Implementations MUST NOT reuse
+randomness in the generation of ML-KEM ciphertexts.
 
 ## Binding properties
 
