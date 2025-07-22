@@ -1179,10 +1179,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-larger-encapsulation-keys-a" class="internal xref">Larger encapsulation keys and/or ciphertexts</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-failures" class="internal xref">Failures</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-failures" class="internal xref">Failures</a></p>
 </li>
             </ul>
 </li>
@@ -1430,27 +1427,16 @@ key schedule in place of the (EC)DHE shared secret, as shown in
       <h2 id="name-discussion">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
       </h2>
-<div id="larger-encapsulation-keys-andor-ciphertexts">
-<section id="section-5.1">
-        <h3 id="name-larger-encapsulation-keys-a">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-larger-encapsulation-keys-a" class="section-name selfRef">Larger encapsulation keys and/or ciphertexts</a>
-        </h3>
-<p id="section-5.1-1">The <code>KeyShareEntry</code> struct limits public keys and ciphertexts to 2^16-1
-bytes; this is the (2^16-1)-byte limit on the <code>key_exchange</code> field in the
-<code>KeyShareEntry</code> struct. All defined parameter sets for ML-KEM have
-encapsulation keys and ciphertexts that fall within the TLS constraints.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="failures">
-<section id="section-5.2">
+<section id="section-5.1">
         <h3 id="name-failures">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-failures" class="section-name selfRef">Failures</a>
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-failures" class="section-name selfRef">Failures</a>
         </h3>
-<p id="section-5.2-1">Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
+<p id="section-5.1-1">Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
 probability of failure, meaning two honest parties may derive different
 shared secrets. This would cause a handshake failure. ML-KEM has a
 cryptographically-small failure rate <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>. In the case of failure,
-clients can retry if a failure is encountered.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+clients can retry if a failure is encountered.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
