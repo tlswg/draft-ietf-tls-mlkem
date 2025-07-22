@@ -379,4 +379,5 @@ tlsiana}}.
 {:numbered="false"}
 
 Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design.
+draft-ietf-tls-hybrid-design design, and to Scott Fluhrer and Eric Rescorla
+for reviews.
