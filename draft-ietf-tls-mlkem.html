@@ -1450,10 +1450,9 @@ encapsulation keys and ciphertexts that fall within the TLS constraints.<a href=
         </h3>
 <p id="section-5.2-1">Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
 probability of failure, meaning two honest parties may derive different
-shared secrets.  This would cause a handshake failure. ML-KEM has a
-cryptographically small failure rate less than 2^-138; implementers should be
-aware of the potential of handshake failure. Clients can retry if a failure
-is encountered.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+shared secrets. This would cause a handshake failure. ML-KEM has a
+cryptographically-small failure rate <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>. In the case of failure,
+clients can retry if a failure is encountered.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1473,22 +1472,21 @@ chosen ciphertext attack (IND-CCA2), which means that shared secret values
 should be indistinguishable from random strings even given the ability to
 have other arbitrary ciphertexts decapsulated.  IND-CCA2 corresponds to
 security against an active attacker, and the public key / secret key pair can
-be treated as a long-term key or reused.  A common design pattern for
-obtaining security under key reuse is to apply the Fujisaki-Okamoto (FO)
-transform <span>[<a href="#FO" class="cite xref">FO</a>]</span> or a variant thereof <span>[<a href="#HHK" class="cite xref">HHK</a>]</span>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+be treated as a long-term key or reused.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">TLS 1.3 does not require that ephemeral public keys be used only in a single
 key exchange session; some implementations may reuse them, at the cost of
-limited forward secrecy.  As a result, any KEM used in the manner described
-in this document <span class="bcp14">MUST</span> explicitly be designed to be secure in the event that
-the public key is reused.  Finite-field and elliptic-curve Diffie-Hellman key
-exchange methods used in TLS 1.3 satisfy this criteria.  For generic KEMs,
+limited forward secrecy. As a result, any KEM used in the manner described in
+this document <span class="bcp14">MUST</span> explicitly be designed to be secure in the event that the
+public key is reused. Finite-field and elliptic-curve Diffie-Hellman key
+exchange methods used in TLS 1.3 satisfy this criteria. For generic KEMs,
 this means satisfying IND-CCA2 security or having a transform like the
-Fujisaki-Okamoto transform <span>[<a href="#FO" class="cite xref">FO</a>]</span> <span>[<a href="#HHK" class="cite xref">HHK</a>]</span> applied.  While it is recommended
-that implementations avoid reuse of KEM public keys, implementations that do
-reuse KEM public keys <span class="bcp14">MUST</span> ensure that the number of reuses of a KEM public
-key abides by any bounds in the specification of the KEM or subsequent
-security analyses.  Implementations <span class="bcp14">MUST NOT</span> reuse randomness in the
-generation of KEM ciphertexts.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+Fujisaki-Okamoto transform <span>[<a href="#FO" class="cite xref">FO</a>]</span> <span>[<a href="#HHK" class="cite xref">HHK</a>]</span> applied. ML-KEM satisfies this
+requirement <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">While it is recommended that implementations avoid reuse of KEM public keys,
+implementations that do reuse KEM public keys <span class="bcp14">MUST</span> ensure that the number of
+reuses of a KEM public key abides by any bounds in the specification of the
+KEM or subsequent security analyses.  Implementations <span class="bcp14">MUST NOT</span> reuse
+randomness in the generation of KEM ciphertexts.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="binding-properties">
