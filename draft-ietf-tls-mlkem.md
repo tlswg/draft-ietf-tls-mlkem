@@ -286,22 +286,6 @@ is encountered.
 
 # Security Considerations {#security-considerations}
 
-## Fixed lengths
-
-For each `NameGroup`, the lengths are fixed (that is, constant) for
-encapsulation keys, the ciphertexts, and the shared secrets.
-
-Variable-length secrets are, generally speaking, dangerous.  In particular,
-when using key material of variable length and processing it using hash
-functions, a timing side channel may arise.  In broad terms, when the secret
-is longer, the hash function may need to process more blocks internally.  In
-some unfortunate circumstances, this has led to timing attacks, e.g. the
-Lucky Thirteen {{LUCKY13}} and Raccoon {{RACCOON}} attacks.
-
-{{AVIRAM}} identified a risk of using variable-length secrets when the hash
-function used in the key derivation function is no longer
-collision-resistant.
-
 ## IND-CCA
 
 The main security property for KEMs is indistinguishability under adaptive
