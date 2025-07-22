@@ -1177,11 +1177,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-failures" class="internal xref">Failures</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1426,19 +1421,7 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 <section id="section-5">
       <h2 id="name-discussion">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
-      </h2>
-<div id="failures">
-<section id="section-5.1">
-        <h3 id="name-failures">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-failures" class="section-name selfRef">Failures</a>
-        </h3>
-<p id="section-5.1-1">Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
-probability of failure, meaning two honest parties may derive different
-shared secrets. This would cause a handshake failure. ML-KEM has a
-cryptographically-small failure rate <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>. In the case of failure,
-clients can retry if a failure is encountered.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+    </h2>
 </section>
 </div>
 <div id="security-considerations">

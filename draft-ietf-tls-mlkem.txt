@@ -74,7 +74,6 @@ Table of Contents
      4.2.  Transmitting encapsulation keys and ciphertexts
      4.3.  Shared secret calculation
    5.  Discussion
-     5.1.  Failures
    6.  Security Considerations
      6.1.  IND-CCA
      6.2.  Binding properties
@@ -246,15 +245,6 @@ Table of Contents
                   Figure 1: Key schedule for key agreement
 
 5.  Discussion
-
-5.1.  Failures
-
-   Some post-quantum key exchange algorithms, including ML-KEM, have
-   non-zero probability of failure, meaning two honest parties may
-   derive different shared secrets.  This would cause a handshake
-   failure.  ML-KEM has a cryptographically-small failure rate
-   [FIPS203].  In the case of failure, clients can retry if a failure is
-   encountered.
 
 6.  Security Considerations
 
