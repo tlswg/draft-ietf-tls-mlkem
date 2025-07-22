@@ -266,14 +266,6 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 
 # Discussion {#discussion}
 
-## Failures
-
-Some post-quantum key exchange algorithms, including ML-KEM, have non-zero
-probability of failure, meaning two honest parties may derive different
-shared secrets. This would cause a handshake failure. ML-KEM has a
-cryptographically-small failure rate {{FIPS203}}. In the case of failure,
-clients can retry if a failure is encountered.
-
 # Security Considerations {#security-considerations}
 
 ## IND-CCA
