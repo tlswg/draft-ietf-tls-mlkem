@@ -178,9 +178,8 @@ Supported Groups registry:
 
 ## Transmitting encapsulation keys and ciphertexts {#construction-transmitting}
 
-The encapsulation key and ciphertext values are directly encoded with
-fixed lengths as in {{FIPS203}}; the representation and length of
-elements MUST be fixed once the algorithm is fixed.
+The encapsulation key and ciphertext values are directly encoded with fixed
+lengths as in {{FIPS203}}.
 
 In TLS 1.3 a KEM encapsulation key or KEM ciphertext is
 represented as a `KeyShareEntry`:
