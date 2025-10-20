@@ -72,6 +72,9 @@ informative:
   HHK: DOI.10.1007/978-3-319-70500-2_12
   HPKE: RFC9180
   hybrid: I-D.ietf-tls-hybrid-design
+  KYBERV:
+    target: https://eprint.iacr.org/2024/843.pdf
+    title: "Formally verifying Kyber Episode V: Machine-checked IND-CCA security and correctness of ML-KEM in EasyCrypt"
   LUCKY13:
     target: https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf
     title: "Lucky Thirteen: Breaking the TLS and DTLS record protocols"
@@ -101,8 +104,9 @@ informative:
 
 --- abstract
 
-This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
-`NamedGroup`s for use in TLS 1.3 to achieve post-quantum key establishment.
+This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as `NamedGroup`s
+and and registers IANA values in the TLS Supported Groups registry for use
+in TLS 1.3 to achieve post-quantum (PQ) key establishment.
 
 --- middle
 
@@ -110,10 +114,11 @@ This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
 
 ## Motivation
 
-FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key establishment via
-lattice-based key establishment mechanism (KEM). Having a purely post-quantum
-(not hybrid) key establishment option for TLS 1.3 is necessary for migrating
-beyond hybrids and for users that need to be fully post-quantum.
+FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC
+9794}} key establishment via lattice-based key establishment mechanism
+(KEM). Having a purely post-quantum (not hybrid) key establishment option for
+TLS 1.3 is necessary for migrating beyond hybrids and for users that want or
+need post-quantum security without hybrids.
 
 # Conventions and Definitions
 
@@ -135,7 +140,7 @@ This document models key establishment as key encapsulation mechanisms
   a shared secret `shared_secret`.
 
 
-ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this API:
+ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
 
 - ML-KEM-512 has encapsulation keys of size 800 bytes, expanded decapsulation
   keys of 1632 bytes, decapsulation key seeds of size 64 bytes, ciphertext
@@ -151,14 +156,13 @@ ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this API:
 
 # Construction {#construction}
 
-We define the KEMs as `NamedGroup`s, sent in the `supported_groups`
-extension.
+The KEMs are defined as `NamedGroup`s, sent in the `supported_groups`
+extension. {{Section 4.2.7 of RFC8446}}
 
 ## Negotiation {#negotiation}
 
-Each method is its own solely post-quantum key establishment method, which
-are assigned their own identifiers, registered by IANA in the TLS
-Supported Groups registry:
+Each parameter set of ML-KEM is assigned an identifier, registered by IANA in
+the TLS Supported Groups registry:
 
 ~~~
     enum {
@@ -178,11 +182,11 @@ Supported Groups registry:
 
 ## Transmitting encapsulation keys and ciphertexts {#construction-transmitting}
 
-The encapsulation key and ciphertext values are directly encoded with fixed
-lengths as in {{FIPS203}}.
+The public encapsulation key and ciphertext values are each
+directly encoded with fixed lengths as in {{FIPS203}}.
 
-In TLS 1.3 a KEM encapsulation key or KEM ciphertext is
-represented as a `KeyShareEntry`:
+In TLS 1.3 a KEM public encapsulation key `pk` or ciphertext `ct` is
+represented as a `KeyShareEntry` {{Section 4.2.8 of RFC8446}}:
 
 ~~~
     struct {
@@ -204,8 +208,11 @@ These are transmitted in the `extension_data` fields of
     } KeyShareServerHello;
 ~~~
 
-The client's shares are listed in descending order of client preference;
-the server selects one algorithm and sends its corresponding share.
+The `KeyShareClientHello` includes a list of `KeyShareEntry` structs that
+represent the key establishment algorithms the client supports. For each
+parameter of ML-KEM the client supports, the corresponding `KeyShareEntry`
+consists of a `NamedGroup` that indicates the appropriate parameter, and a
+`key_exchange` value that is the `pk` output of the `KeyGen` algorithm.
 
 For the client's share, the `key_exchange` value contains the `pk`
 output of the corresponding KEM `NamedGroup`'s `KeyGen` algorithm.
@@ -226,10 +233,10 @@ aborted with an `internal_error` alert.
 
 ## Shared secret calculation {#construction-shared-secret}
 
-The shared secret output from the ML-KEM `Encaps` and `Decaps`
-algorithms over the appropriate keypair and ciphertext results in the
-same shared secret `shared_secret`, which is inserted into the TLS 1.3
-key schedule in place of the (EC)DHE shared secret, as shown in
+The shared secret output from the ML-KEM `Encaps` and `Decaps` algorithms
+over the appropriate keypair and ciphertext results in the same shared secret
+`shared_secret` as its honest peer, which is inserted into the TLS 1.3 key
+schedule in place of the (EC)DHE shared secret, as shown in
 {{fig-key-schedule}}.
 
 ~~~~
@@ -269,25 +276,26 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 ## IND-CCA
 
 The main security property for KEMs is indistinguishability under adaptive
-chosen ciphertext attack (IND-CCA2), which means that shared secret values
+chosen ciphertext attack (IND-CCA), which means that shared secret values
 should be indistinguishable from random strings even given the ability to
-have other arbitrary ciphertexts decapsulated.  IND-CCA2 corresponds to
+have other arbitrary ciphertexts decapsulated.  IND-CCA corresponds to
 security against an active attacker, and the public key / secret key pair can
-be treated as a long-term key or reused.
+be treated as a long-term key or reused. ML-KEM satisfies IND-CCA security in
+the random oracle model {{KYBERV}}.
 
-TLS 1.3 does not require that ephemeral public keys be used only in a single
-key exchange session; some implementations may reuse them, at the cost of
-limited forward secrecy. As a result, any KEM used in the manner described in
-this document MUST explicitly be designed to be secure in the event that the
-public key is reused. Finite-field and elliptic-curve Diffie-Hellman key
-exchange methods used in TLS 1.3 satisfy this criteria. For generic KEMs,
-this means satisfying IND-CCA2 security or having a transform like the
-Fujisaki-Okamoto transform {{FO}} {{HHK}} applied. ML-KEM satisfies this
-requirement {{FIPS203}}.
+TLS 1.3 does not prohibit key re-use; some implementations may use the same
+ephemeral public key for more than one key establishment at the cost of
+limited forward secrecy.<!-- [include reference to section in RFC8446 that
+states --> <!-- this?] --> Care must be taken to ensure that keys are only
+re-used if the algorithms from which they are derived are designed to be
+secure under key-reuse. ML-KEM's IND-CCA security satisfies this requirement
+such that the public key/secret key pair can be used long-term or re-used
+without compromising the security of the keys. However, it is
+still recommended that implementations avoid re-use of any keys (including
+ML-KEM keys) to ensure perfect forward secrecy.
 
-Along with other TLS 1.3 key establishment methods, it is recommended that
-implementations avoid reuse of ML-KEM keys. Implementations MUST NOT reuse
-randomness in the generation of ML-KEM ciphertexts.
+Implementations MUST NOT reuse randomness in the generation of ML-KEM
+ciphertexts.
 
 ## Binding properties
 
@@ -295,7 +303,7 @@ TLS 1.3's key schedule commits to the the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field as part of the `key_share` extension
 are populated with those values are included as part of the handshake
 messages, providing resilience against re-encapsulation attacks against KEMs
-used for key establishment.
+used for key establishment {{CDM23}}.
 
 # IANA Considerations
 
@@ -369,5 +377,5 @@ tlsiana}}.
 {:numbered="false"}
 
 Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design, and to Scott Fluhrer and Eric Rescorla
-for reviews.
+draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla, and
+Rebecca Guthrie for reviews.
