@@ -114,11 +114,11 @@ in TLS 1.3 to achieve post-quantum (PQ) key establishment.
 
 ## Motivation
 
-FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC
-9794}} key establishment via lattice-based key establishment mechanism
-(KEM). Having a purely post-quantum (not hybrid) key establishment option for
-TLS 1.3 is necessary for migrating beyond hybrids and for users that want or
-need post-quantum security without hybrids.
+FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}}
+key establishment via lattice-based key establishment mechanism (KEM). Having
+a purely post-quantum (not hybrid) key establishment option for TLS 1.3 is
+necessary for migrating beyond hybrids and for users that want or need
+post-quantum security without hybrids.
 
 # Conventions and Definitions
 
@@ -157,7 +157,7 @@ ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
 # Construction {#construction}
 
 The KEMs are defined as `NamedGroup`s, sent in the `supported_groups`
-extension. {{Section 4.2.7 of RFC8446}}
+extension. {{Section 4.2.7 of !RFC8446}}
 
 ## Negotiation {#negotiation}
 
@@ -186,7 +186,7 @@ The public encapsulation key and ciphertext values are each
 directly encoded with fixed lengths as in {{FIPS203}}.
 
 In TLS 1.3 a KEM public encapsulation key `pk` or ciphertext `ct` is
-represented as a `KeyShareEntry` {{Section 4.2.8 of RFC8446}}:
+represented as a `KeyShareEntry` {{Section 4.2.8 of !RFC8446}}:
 
 ~~~
     struct {
