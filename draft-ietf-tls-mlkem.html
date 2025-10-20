@@ -8,26 +8,25 @@
 <meta content="Deirdre Connolly" name="author">
 <meta content="
        This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
- NamedGroup s for use in TLS 1.3 to achieve post-quantum key agreement. 
+ NamedGroup s for use in TLS 1.3 to achieve post-quantum key establishment. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="kems" name="keyword">
 <meta content="tls" name="keyword">
 <meta content="draft-ietf-tls-mlkem-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    requests 2.32.5
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-tls-mlkem.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1046,11 +1045,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ietf-tls-mlkem</td>
-<td class="right">July 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Connolly</td>
-<td class="center">Expires 23 January 2026</td>
+<td class="center">Expires 23 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tls-mlkem-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-22" class="published">22 July 2025</time>
+<time datetime="2025-10-20" class="published">20 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-23">23 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-23">23 April 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1082,7 +1081,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
-<code>NamedGroup</code>s for use in TLS 1.3 to achieve post-quantum key agreement.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<code>NamedGroup</code>s for use in TLS 1.3 to achieve post-quantum key establishment.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1118,7 +1117,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1220,9 +1219,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-motivation">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
         </h3>
-<p id="section-1.1-1">FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key agreement via
+<p id="section-1.1-1">FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key establishment via
 lattice-based key establishment mechanism (KEM). Having a purely post-quantum
-(not hybrid) key agreement option for TLS 1.3 is necessary for migrating
+(not hybrid) key establishment option for TLS 1.3 is necessary for migrating
 beyond hybrids and for users that need to be fully post-quantum.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1244,7 +1243,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-key-encapsulation-mechanism">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-key-encapsulation-mechanism" class="section-name selfRef">Key encapsulation mechanisms</a>
       </h2>
-<p id="section-3-1">This document models key agreement as key encapsulation mechanisms
+<p id="section-3-1">This document models key establishment as key encapsulation mechanisms
 (KEMs), which consist of three algorithms:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-2.1">
@@ -1295,7 +1294,7 @@ extension.<a href="#section-4-1" class="pilcrow">¶</a></p>
         <h3 id="name-negotiation">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-negotiation" class="section-name selfRef">Negotiation</a>
         </h3>
-<p id="section-4.1-1">Each method is its own solely post-quantum key agreement method, which
+<p id="section-4.1-1">Each method is its own solely post-quantum key establishment method, which
 are assigned their own identifiers, registered by IANA in the TLS
 Supported Groups registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.1-2">
@@ -1304,7 +1303,7 @@ Supported Groups registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 
          ...,
 
-          /* ML-KEM Key Agreement Methods */
+          /* ML-KEM Key Establishment Methods */
           mlkem512(0x0200),
           mlkem768(0x0201),
           mlkem1024(0x0202)
@@ -1372,7 +1371,7 @@ algorithms over the appropriate keypair and ciphertext results in the
 same shared secret <code>shared_secret</code>, which is inserted into the TLS 1.3
 key schedule in place of the (EC)DHE shared secret, as shown in
 <a href="#fig-key-schedule" class="auto internal xref">Figure 1</a>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<span id="name-key-schedule-for-key-agreem"></span><div id="fig-key-schedule">
+<span id="name-key-schedule-for-key-establ"></span><div id="fig-key-schedule">
 <figure id="figure-1">
           <div class="alignLeft art-text artwork" id="section-4.3-2.1">
 <pre>
@@ -1407,7 +1406,7 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-key-schedule-for-key-agreem" class="selfRef">Key schedule for key agreement</a>
+<a href="#name-key-schedule-for-key-establ" class="selfRef">Key schedule for key establishment</a>
           </figcaption></figure>
 </div>
 </section>
@@ -1439,7 +1438,7 @@ exchange methods used in TLS 1.3 satisfy this criteria. For generic KEMs,
 this means satisfying IND-CCA2 security or having a transform like the
 Fujisaki-Okamoto transform <span>[<a href="#FO" class="cite xref">FO</a>]</span> <span>[<a href="#HHK" class="cite xref">HHK</a>]</span> applied. ML-KEM satisfies this
 requirement <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">Along with other TLS 1.3 key agreement methods, it is recommended that
+<p id="section-5.1-3">Along with other TLS 1.3 key establishment methods, it is recommended that
 implementations avoid reuse of ML-KEM keys. Implementations <span class="bcp14">MUST NOT</span> reuse
 randomness in the generation of ML-KEM ciphertexts.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1453,7 +1452,7 @@ randomness in the generation of ML-KEM ciphertexts.<a href="#section-5.1-3" clas
 ciphertext as the <code>key_exchange</code> field as part of the <code>key_share</code> extension
 are populated with those values are included as part of the handshake
 messages, providing resilience against re-encapsulation attacks against KEMs
-used for key agreement.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+used for key establishment.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1617,7 +1616,7 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <dd class="break"></dd>
 <dt id="hybrid">[hybrid]</dt>
         <dd>
-<span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-14</span>, <time datetime="2025-07-21" class="refDate">21 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-14">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-14</a>&gt;</span>. </dd>
+<span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-16</span>, <time datetime="2025-09-07" class="refDate">7 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="LUCKY13">[LUCKY13]</dt>
         <dd>
