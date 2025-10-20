@@ -102,7 +102,7 @@ informative:
 --- abstract
 
 This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
-`NamedGroup`s for use in TLS 1.3 to achieve post-quantum key agreement.
+`NamedGroup`s for use in TLS 1.3 to achieve post-quantum key establishment.
 
 --- middle
 
@@ -110,9 +110,9 @@ This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
 
 ## Motivation
 
-FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key agreement via
+FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key establishment via
 lattice-based key establishment mechanism (KEM). Having a purely post-quantum
-(not hybrid) key agreement option for TLS 1.3 is necessary for migrating
+(not hybrid) key establishment option for TLS 1.3 is necessary for migrating
 beyond hybrids and for users that need to be fully post-quantum.
 
 # Conventions and Definitions
@@ -121,7 +121,7 @@ beyond hybrids and for users that need to be fully post-quantum.
 
 # Key encapsulation mechanisms {#kems}
 
-This document models key agreement as key encapsulation mechanisms
+This document models key establishment as key encapsulation mechanisms
 (KEMs), which consist of three algorithms:
 
 - `KeyGen() -> (pk, sk)`: A probabilistic key generation algorithm,
@@ -156,7 +156,7 @@ extension.
 
 ## Negotiation {#negotiation}
 
-Each method is its own solely post-quantum key agreement method, which
+Each method is its own solely post-quantum key establishment method, which
 are assigned their own identifiers, registered by IANA in the TLS
 Supported Groups registry:
 
@@ -165,7 +165,7 @@ Supported Groups registry:
 
          ...,
 
-          /* ML-KEM Key Agreement Methods */
+          /* ML-KEM Key Establishment Methods */
           mlkem512(0x0200),
           mlkem768(0x0201),
           mlkem1024(0x0202)
@@ -262,7 +262,7 @@ key schedule in place of the (EC)DHE shared secret, as shown in
                                     +-----> Derive-Secret(...)
                                     +-----> Derive-Secret(...)
 ~~~~
-{: #fig-key-schedule title="Key schedule for key agreement"}
+{: #fig-key-schedule title="Key schedule for key establishment"}
 
 # Security Considerations {#security-considerations}
 
@@ -285,7 +285,7 @@ this means satisfying IND-CCA2 security or having a transform like the
 Fujisaki-Okamoto transform {{FO}} {{HHK}} applied. ML-KEM satisfies this
 requirement {{FIPS203}}.
 
-Along with other TLS 1.3 key agreement methods, it is recommended that
+Along with other TLS 1.3 key establishment methods, it is recommended that
 implementations avoid reuse of ML-KEM keys. Implementations MUST NOT reuse
 randomness in the generation of ML-KEM ciphertexts.
 
@@ -295,7 +295,7 @@ TLS 1.3's key schedule commits to the the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field as part of the `key_share` extension
 are populated with those values are included as part of the handshake
 messages, providing resilience against re-encapsulation attacks against KEMs
-used for key agreement.
+used for key establishment.
 
 # IANA Considerations
 
