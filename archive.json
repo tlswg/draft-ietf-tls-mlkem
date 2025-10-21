@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T01:37:54.550207+00:00",
+  "timestamp": "2025-10-21T01:40:36.607900+00:00",
   "repo": "tlswg/draft-ietf-tls-mlkem",
   "labels": [
     {
@@ -125,16 +125,24 @@
       "id": "I_kwDOLZWQXM7KKc1Z",
       "title": "Give better motivations",
       "url": "https://github.com/tlswg/draft-ietf-tls-mlkem/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "daira",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "> FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key agreement via lattice-based key establishment mechanism (KEM). Having a purely post-quantum (not hybrid) key agreement option for TLS 1.3 is necessary for migrating beyond hybrids and for users that need to be fully post-quantum.\n\nThis doesn't say why we might want to move beyond hybrids. Aren't the motivations primarily performance and complexity? If we didn't care about those (which obviously we do), then there would be no reason to move other than silly conformance reasons. And to the extent that conformance reasons are not silly, they're ultimately also motivated by performance and complexity.",
       "createdAt": "2025-09-07T15:41:37Z",
-      "updatedAt": "2025-09-07T15:41:37Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-10-20T23:19:40Z",
+      "closedAt": "2025-10-20T23:19:40Z",
+      "comments": [
+        {
+          "author": "dconnolly",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No one is happy with longer motivations, keeping them shorter is better imo",
+          "createdAt": "2025-10-20T23:19:39Z",
+          "updatedAt": "2025-10-20T23:19:39Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -234,7 +242,7 @@
       "labels": [],
       "body": "This PR is an attempt to strike a balance between\r\n\r\n- those who would like to deploy ML-KEM as a non-hybrid, and\r\n- those who believe that a non-hybrid is not the best choice for the average user.\r\n\r\nIn essence, it leaves the code point registrations (for interop), but clarifies that the choice to deploy a non-hybrid should only be taken in acknowledgement of the possible risks involved.\r\n\r\nThis is done first and foremost by setting the recommended column in the IANA registration to `D`iscouraged.\r\n\r\nAccording to [draft-ietf-tls-rfc8447bis](https://datatracker.ietf.org/doc/draft-ietf-tls-rfc8447bis/):\r\n\r\n> D:  Indicates that the item is discouraged.  This marking could be\r\n      used to identify mechanisms that might result in problems if they\r\n      are used, such as a weak cryptographic algorithm or a mechanism\r\n      that might cause interoperability problems in deployment.  When\r\n      marking a registry entry as \u201cD\u201d, either the References or the\r\n      Comments Column MUST include sufficient information to determine\r\n      why the marking has been applied.  Implementers and users SHOULD\r\n      consult the linked references associated with the item to\r\n      determine the conditions under which the item SHOULD NOT or MUST\r\n      NOT be used.\r\n\r\nPerhaps taking `could` a bit too seriously for the original intent, the last sentence is exactly the mechanism this PR wishes to leverage. The security considerations have been extended by (the beginnings of; Please extend this!) a section about non-hybrids, and this section is intended to highlight and explain the use cases in which a non-hybrid might be a good fit.\r\n\r\nI have also made some changes to the motivation, to explain the `D` column early in the document.\r\n\r\nGoes without saying, but everything here is up for discussion :)",
       "createdAt": "2025-06-06T10:09:21Z",
-      "updatedAt": "2025-06-10T08:44:20Z",
+      "updatedAt": "2025-10-20T23:20:33Z",
       "baseRepository": "tlswg/draft-ietf-tls-mlkem",
       "baseRefName": "main",
       "baseRefOid": "61a8fdf89c20a1e43970559b04b055e5288cb100",
@@ -245,7 +253,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "dconnolly",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is up for debate in the WG",
+          "createdAt": "2025-10-20T23:20:33Z",
+          "updatedAt": "2025-10-20T23:20:33Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLZWQXM6tmky9",
