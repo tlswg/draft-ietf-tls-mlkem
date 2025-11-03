@@ -7,8 +7,9 @@
 <title>ML-KEM Post-Quantum Key Agreement for TLS 1.3</title>
 <meta content="Deirdre Connolly" name="author">
 <meta content="
-       This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
- NamedGroup s for use in TLS 1.3 to achieve post-quantum key establishment. 
+       This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as  NamedGroup s
+and and registers IANA values in the TLS Supported Groups registry for use
+in TLS 1.3 to achieve post-quantum (PQ) key establishment. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="kems" name="keyword">
@@ -1045,11 +1046,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ietf-tls-mlkem</td>
-<td class="right">October 2025</td>
+<td class="right">November 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Connolly</td>
-<td class="center">Expires 23 April 2026</td>
+<td class="center">Expires 7 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tls-mlkem-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-20" class="published">20 October 2025</time>
+<time datetime="2025-11-03" class="published">3 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-23">23 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-07">7 May 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1080,8 +1081,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">ML-KEM Post-Quantum Key Agreement for TLS 1.3</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as a standalone
-<code>NamedGroup</code>s for use in TLS 1.3 to achieve post-quantum key establishment.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as <code>NamedGroup</code>s
+and and registers IANA values in the TLS Supported Groups registry for use
+in TLS 1.3 to achieve post-quantum (PQ) key establishment.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1117,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1219,10 +1221,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-motivation">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
         </h3>
-<p id="section-1.1-1">FIPS 203 (ML-KEM) is a new FIPS standard for post-quantum key establishment via
-lattice-based key establishment mechanism (KEM). Having a purely post-quantum
-(not hybrid) key establishment option for TLS 1.3 is necessary for migrating
-beyond hybrids and for users that need to be fully post-quantum.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">FIPS 203 (ML-KEM) <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span> is a FIPS standard for post-quantum <span>[<a href="#RFC9794" class="cite xref">RFC9794</a>]</span>
+key establishment via lattice-based key establishment mechanism (KEM). Having
+a purely post-quantum (not hybrid) key establishment option for TLS 1.3 is
+necessary for migrating beyond hybrids and for users that want or need
+post-quantum security without hybrids.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1262,7 +1265,7 @@ input a secret decapsulation key <code>sk</code> and ciphertext <code>ct</code> 
 a shared secret <code>shared_secret</code>.<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-3-3">ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this API:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-4.1">
           <p id="section-3-4.1.1">ML-KEM-512 has encapsulation keys of size 800 bytes, expanded decapsulation
@@ -1287,16 +1290,15 @@ ciphertext size of 1568 bytes, and shared secrets of size 32 bytes<a href="#sect
       <h2 id="name-construction">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-construction" class="section-name selfRef">Construction</a>
       </h2>
-<p id="section-4-1">We define the KEMs as <code>NamedGroup</code>s, sent in the <code>supported_groups</code>
-extension.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The KEMs are defined as <code>NamedGroup</code>s, sent in the <code>supported_groups</code>
+extension. <span><a href="https://rfc-editor.org/rfc/rfc8446#section-4.2.7" class="relref">Section 4.2.7</a> of [<a href="#RFC8446" class="cite xref">RFC8446</a>]</span><a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="negotiation">
 <section id="section-4.1">
         <h3 id="name-negotiation">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-negotiation" class="section-name selfRef">Negotiation</a>
         </h3>
-<p id="section-4.1-1">Each method is its own solely post-quantum key establishment method, which
-are assigned their own identifiers, registered by IANA in the TLS
-Supported Groups registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">Each parameter set of ML-KEM is assigned an identifier, registered by IANA in
+the TLS Supported Groups registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.1-2">
 <pre>
     enum {
@@ -1320,10 +1322,10 @@ Supported Groups registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-transmitting-encapsulation-">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-transmitting-encapsulation-" class="section-name selfRef">Transmitting encapsulation keys and ciphertexts</a>
         </h3>
-<p id="section-4.2-1">The encapsulation key and ciphertext values are directly encoded with fixed
-lengths as in <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">In TLS 1.3 a KEM encapsulation key or KEM ciphertext is
-represented as a <code>KeyShareEntry</code>:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">The public encapsulation key and ciphertext values are each
+directly encoded with fixed lengths as in <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">In TLS 1.3 a KEM public encapsulation key <code>pk</code> or ciphertext <code>ct</code> is
+represented as a <code>KeyShareEntry</code> <span><a href="https://rfc-editor.org/rfc/rfc8446#section-4.2.8" class="relref">Section 4.2.8</a> of [<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2-3">
 <pre>
     struct {
@@ -1345,8 +1347,11 @@ represented as a <code>KeyShareEntry</code>:<a href="#section-4.2-2" class="pilc
     } KeyShareServerHello;
 </pre><a href="#section-4.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-6">The client's shares are listed in descending order of client preference;
-the server selects one algorithm and sends its corresponding share.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-6">The <code>KeyShareClientHello</code> includes a list of <code>KeyShareEntry</code> structs that
+represent the key establishment algorithms the client supports. For each
+parameter of ML-KEM the client supports, the corresponding <code>KeyShareEntry</code>
+consists of a <code>NamedGroup</code> that indicates the appropriate parameter, and a
+<code>key_exchange</code> value that is the <code>pk</code> output of the <code>KeyGen</code> algorithm.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 <p id="section-4.2-7">For the client's share, the <code>key_exchange</code> value contains the <code>pk</code>
 output of the corresponding KEM <code>NamedGroup</code>'s <code>KeyGen</code> algorithm.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
 <p id="section-4.2-8">For the server's share, the <code>key_exchange</code> value contains the <code>ct</code>
@@ -1366,10 +1371,10 @@ aborted with an <code>internal_error</code> alert.<a href="#section-4.2-11" clas
         <h3 id="name-shared-secret-calculation">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-shared-secret-calculation" class="section-name selfRef">Shared secret calculation</a>
         </h3>
-<p id="section-4.3-1">The shared secret output from the ML-KEM <code>Encaps</code> and <code>Decaps</code>
-algorithms over the appropriate keypair and ciphertext results in the
-same shared secret <code>shared_secret</code>, which is inserted into the TLS 1.3
-key schedule in place of the (EC)DHE shared secret, as shown in
+<p id="section-4.3-1">The shared secret output from the ML-KEM <code>Encaps</code> and <code>Decaps</code> algorithms
+over the appropriate keypair and ciphertext results in the same shared secret
+<code>shared_secret</code> as its honest peer, which is inserted into the TLS 1.3 key
+schedule in place of the (EC)DHE shared secret, as shown in
 <a href="#fig-key-schedule" class="auto internal xref">Figure 1</a>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <span id="name-key-schedule-for-key-establ"></span><div id="fig-key-schedule">
 <figure id="figure-1">
@@ -1424,23 +1429,23 @@ key schedule in place of the (EC)DHE shared secret, as shown in
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-ind-cca" class="section-name selfRef">IND-CCA</a>
         </h3>
 <p id="section-5.1-1">The main security property for KEMs is indistinguishability under adaptive
-chosen ciphertext attack (IND-CCA2), which means that shared secret values
+chosen ciphertext attack (IND-CCA), which means that shared secret values
 should be indistinguishable from random strings even given the ability to
-have other arbitrary ciphertexts decapsulated.  IND-CCA2 corresponds to
+have other arbitrary ciphertexts decapsulated.  IND-CCA corresponds to
 security against an active attacker, and the public key / secret key pair can
-be treated as a long-term key or reused.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">TLS 1.3 does not require that ephemeral public keys be used only in a single
-key exchange session; some implementations may reuse them, at the cost of
-limited forward secrecy. As a result, any KEM used in the manner described in
-this document <span class="bcp14">MUST</span> explicitly be designed to be secure in the event that the
-public key is reused. Finite-field and elliptic-curve Diffie-Hellman key
-exchange methods used in TLS 1.3 satisfy this criteria. For generic KEMs,
-this means satisfying IND-CCA2 security or having a transform like the
-Fujisaki-Okamoto transform <span>[<a href="#FO" class="cite xref">FO</a>]</span> <span>[<a href="#HHK" class="cite xref">HHK</a>]</span> applied. ML-KEM satisfies this
-requirement <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span>.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">Along with other TLS 1.3 key establishment methods, it is recommended that
-implementations avoid reuse of ML-KEM keys. Implementations <span class="bcp14">MUST NOT</span> reuse
-randomness in the generation of ML-KEM ciphertexts.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+be treated as a long-term key or reused. ML-KEM satisfies IND-CCA security in
+the random oracle model <span>[<a href="#KYBERV" class="cite xref">KYBERV</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">TLS 1.3 does not prohibit key re-use; some implementations may use the same
+ephemeral public key for more than one key establishment at the cost of
+limited forward secrecy. Care must be taken to ensure that keys are only
+re-used if the algorithms from which they are derived are designed to be
+secure under key-reuse. ML-KEM's IND-CCA security satisfies this requirement
+such that the public key/secret key pair can be used long-term or re-used
+without compromising the security of the keys. However, it is still
+recommended that implementations avoid re-use of any keys (including ML-KEM
+keys) to ensure perfect forward secrecy.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">Implementations <span class="bcp14">MUST NOT</span> reuse randomness in the generation of ML-KEM
+ciphertexts.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="binding-properties">
@@ -1452,7 +1457,7 @@ randomness in the generation of ML-KEM ciphertexts.<a href="#section-5.1-3" clas
 ciphertext as the <code>key_exchange</code> field as part of the <code>key_share</code> extension
 are populated with those values are included as part of the handshake
 messages, providing resilience against re-encapsulation attacks against KEMs
-used for key establishment.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+used for key establishment <span>[<a href="#CDM23" class="cite xref">CDM23</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1578,8 +1583,12 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+      <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1618,6 +1627,10 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
         <dd>
 <span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-16</span>, <time datetime="2025-09-07" class="refDate">7 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="KYBERV">[KYBERV]</dt>
+        <dd>
+<span class="refTitle">"Formally verifying Kyber Episode V: Machine-checked IND-CCA security and correctness of ML-KEM in EasyCrypt"</span>, <span>n.d.</span>, <span>&lt;<a href="https://eprint.iacr.org/2024/843.pdf">https://eprint.iacr.org/2024/843.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="LUCKY13">[LUCKY13]</dt>
         <dd>
 <span class="refAuthor">Al Fardan, N. J.</span> and <span class="refAuthor">K. G. Paterson</span>, <span class="refTitle">"Lucky Thirteen: Breaking the TLS and DTLS record protocols"</span>, <span>n.d.</span>, <span>&lt;<a href="https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf">https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf</a>&gt;</span>. </dd>
@@ -1625,6 +1638,10 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <dt id="RACCOON">[RACCOON]</dt>
         <dd>
 <span class="refAuthor">Merget, R.</span>, <span class="refAuthor">Brinkmann, M.</span>, <span class="refAuthor">Aviram, N.</span>, <span class="refAuthor">Somorovsky, J.</span>, <span class="refAuthor">Mittmann, J.</span>, and <span class="refAuthor">J. Schwenk</span>, <span class="refTitle">"Raccoon Attack: Finding and Exploiting Most-Significant-Bit-Oracles in TLS-DH(E)"</span>, <time datetime="2020-09" class="refDate">September 2020</time>, <span>&lt;<a href="https://raccoon-attack.com/">https://raccoon-attack.com/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9794">[RFC9794]</dt>
+        <dd>
+<span class="refAuthor">Driscoll, F.</span>, <span class="refAuthor">Parsons, M.</span>, and <span class="refAuthor">B. Hale</span>, <span class="refTitle">"Terminology for Post-Quantum Traditional Hybrid Schemes"</span>, <span class="seriesInfo">RFC 9794</span>, <span class="seriesInfo">DOI 10.17487/RFC9794</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9794">https://www.rfc-editor.org/rfc/rfc9794</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="tlsiana">[tlsiana]</dt>
       <dd>
@@ -1641,8 +1658,8 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design, and to Scott Fluhrer and Eric Rescorla
-for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla, and
+Rebecca Guthrie for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
