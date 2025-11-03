@@ -101,7 +101,6 @@ informative:
       ins: J. Schwenk
     date: 2020-09
   RFC9794:
-  RFC8446:
   tlsiana: I-D.ietf-tls-rfc8447bis
 
 --- abstract
@@ -287,14 +286,13 @@ the random oracle model {{KYBERV}}.
 
 TLS 1.3 does not prohibit key re-use; some implementations may use the same
 ephemeral public key for more than one key establishment at the cost of
-limited forward secrecy.<!-- [include reference to section in RFC8446 that
-states --> <!-- this?] --> Care must be taken to ensure that keys are only
+limited forward secrecy. Care must be taken to ensure that keys are only
 re-used if the algorithms from which they are derived are designed to be
 secure under key-reuse. ML-KEM's IND-CCA security satisfies this requirement
 such that the public key/secret key pair can be used long-term or re-used
-without compromising the security of the keys. However, it is
-still recommended that implementations avoid re-use of any keys (including
-ML-KEM keys) to ensure perfect forward secrecy.
+without compromising the security of the keys. However, it is still
+recommended that implementations avoid re-use of any keys (including ML-KEM
+keys) to ensure perfect forward secrecy.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
 ciphertexts.
