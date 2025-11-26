@@ -106,7 +106,7 @@ informative:
 --- abstract
 
 This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as `NamedGroup`s
-and and registers IANA values in the TLS Supported Groups registry for use
+and registers IANA values in the TLS Supported Groups registry for use
 in TLS 1.3 to achieve post-quantum (PQ) key establishment.
 
 --- middle
@@ -116,9 +116,9 @@ in TLS 1.3 to achieve post-quantum (PQ) key establishment.
 ## Motivation
 
 FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}}
-key establishment via lattice-based key establishment mechanism (KEM). Having
+key establishment via lattice-based key encapsulation mechanism (KEM). Having
 a purely post-quantum (not hybrid) key establishment option for TLS 1.3 is
-necessary for migrating beyond hybrids and for users that want or need
+necessary for migrating beyond hybrids and for users who want or need
 post-quantum security without hybrids.
 
 # Conventions and Definitions
@@ -299,7 +299,7 @@ ciphertexts.
 
 ## Binding properties
 
-TLS 1.3's key schedule commits to the the ML-KEM encapsulation key and the
+TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field as part of the `key_share` extension
 are populated with those values are included as part of the handshake
 messages, providing resilience against re-encapsulation attacks against KEMs
