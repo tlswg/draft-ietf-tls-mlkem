@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-04T01:42:45.325881+00:00",
+  "timestamp": "2025-11-27T01:42:55.522750+00:00",
   "repo": "tlswg/draft-ietf-tls-mlkem",
   "labels": [
     {
@@ -298,6 +298,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOLZWQXM61uEIO",
+      "title": "Editorial: Corrected typos",
+      "url": "https://github.com/tlswg/draft-ietf-tls-mlkem/pull/8",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-26T19:42:07Z",
+      "updatedAt": "2025-11-26T19:42:07Z",
+      "baseRepository": "tlswg/draft-ietf-tls-mlkem",
+      "baseRefName": "main",
+      "baseRefOid": "b6fbfa37a75ef3a6768d327165ffee0192ede69a",
+      "headRepository": "muhammad-usama-sardar/draft-ietf-tls-mlkem",
+      "headRefName": "patch-1",
+      "headRefOid": "90b8be001aa758dd89a142e088cf872a53d246a4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
