@@ -1180,20 +1180,6 @@ in TLS 1.3 to achieve post-quantum (PQ) key establishment.<a href="#section-abst
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-standalone-versus-hybrid-ke" class="internal xref">Standalone versus hybrid key establishment</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-ind-cca" class="internal xref">IND-CCA</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-key-reuse" class="internal xref">Key reuse</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-binding-properties" class="internal xref">Binding properties</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1233,8 +1219,9 @@ in TLS 1.3 to achieve post-quantum (PQ) key establishment.<a href="#section-abst
 key establishment via a lattice-based key encapsulation mechanism (KEM). This
 document defines key establishment options for TLS 1.3 that use solely
 post-quantum algorithms, without a hybrid construction that also includes a
-traditional cryptographic algorithm. Use cases include regulatory frameworks
-that require standalone post-quantum key establishment, targeting smaller key
+traditional cryptographic algorithm. Use cases include
+regulatory<span>[<a href="#ITSP.40.111" class="cite xref">ITSP.40.111</a>]</span> or policy frameworks<span>[<a href="#CNSSP15" class="cite xref">CNSSP15</a>]</span><span>[<a href="#CNSAFAQ" class="cite xref">CNSAFAQ</a>]</span> that
+require standalone post-quantum key establishment, targeting smaller key
 sizes or less computation, and simplicity.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1430,68 +1417,43 @@ schedule in place of the (EC)DHE shared secret, as shown in
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<div id="standalone-versus-hybrid-key-establishment">
-<section id="section-5.1">
-        <h3 id="name-standalone-versus-hybrid-ke">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-standalone-versus-hybrid-ke" class="section-name selfRef">Standalone versus hybrid key establishment</a>
-        </h3>
-<p id="section-5.1-1">This document defines standalone ML-KEM key establishment for TLS 1.3.
-Hybrid key establishment mechanisms, which combine a post-quantum algorithm
-with a traditional algorithm such as ECDH, are supported generically via
-<span>[<a href="#HYBRID" class="cite xref">HYBRID</a>]</span> with some concrete definitions in <span>[<a href="#ECDHE-MLKEM" class="cite xref">ECDHE-MLKEM</a>]</span>. Hybrid
-mechanisms provide security as long as at least one of the component
-algorithms remains unbroken, combining quantum-resistant and traditional
-cryptographic assumptions. Standalone ML-KEM relies on lattice-based and hash
-function cryptographic assumptions for its security.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="ind-cca">
-<section id="section-5.2">
-        <h3 id="name-ind-cca">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-ind-cca" class="section-name selfRef">IND-CCA</a>
-        </h3>
-<p id="section-5.2-1">The main security property for KEMs is indistinguishability under adaptive
+<p id="section-5-1">Implementations <span class="bcp14">MUST NOT</span> reuse randomness in the generation of ML-KEM
+ciphertexts— it follows that ciphertexts also <span class="bcp14">MUST NOT</span> be reused.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">This document defines standalone ML-KEM key establishment for TLS 1.3.
+Hybrid key establishment mechanisms, which support combining a post-quantum
+algorithm with a traditional algorithm such as ECDH, are supported
+generically via <span>[<a href="#HYBRID" class="cite xref">HYBRID</a>]</span> with some concrete definitions in
+<span>[<a href="#ECDHE-MLKEM" class="cite xref">ECDHE-MLKEM</a>]</span>. Hybrid mechanisms provide security as long as at least one
+of the component algorithms remains unbroken, such as combining
+quantum-resistant and traditional cryptographic assumptions. Standalone
+ML-KEM relies on lattice-based and hash function cryptographic assumptions
+for its security.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
 should be indistinguishable from random strings even given the ability to
 have other arbitrary ciphertexts decapsulated.  IND-CCA corresponds to
 security against an active attacker, and the public encapsulation key /
 secret decapsulation key pair can be treated as a long-term key or
 reused. ML-KEM satisfies IND-CCA security in the random oracle model
-<span>[<a href="#KYBERV" class="cite xref">KYBERV</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="key-reuse">
-<section id="section-5.3">
-        <h3 id="name-key-reuse">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-key-reuse" class="section-name selfRef">Key reuse</a>
-        </h3>
-<p id="section-5.3-1">ML-KEM is explicitly designed to be secure in the event that the keypair is
-reused, satisfying IND-CCA security via a variant of the Fujisaki-Okamoto
-(FO) transform <span>[<a href="#FO" class="cite xref">FO</a>]</span><span>[<a href="#HHK" class="cite xref">HHK</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">While it is recommended that implementations avoid reuse of ML-KEM keypairs
-to ensure forward secrecy, implementations that do reuse <span class="bcp14">MUST</span> ensure that the
-number of reuses abides by bounds in <span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span> or subsequent security
-analyses of ML-KEM.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">Implementations <span class="bcp14">MUST NOT</span> reuse randomness in the generation of ML-KEM
-ciphertexts.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4"><span>[<a href="#NIST-SP-800-227" class="cite xref">NIST-SP-800-227</a>]</span> includes guidelines and requirements for implementations
+<span>[<a href="#KYBERV" class="cite xref">KYBERV</a>]</span> via a variant of the Fujisaki-Okamoto (FO) transform
+<span>[<a href="#FO" class="cite xref">FO</a>]</span><span>[<a href="#HHK" class="cite xref">HHK</a>]</span>.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">TLS 1.3 does not require that ephemeral public keys be used only in a single
+key exchange session; some implementations may reuse them, at the cost of
+limited forward secrecy. ML-KEM is explicitly designed to be secure in the
+event that the keypair is reused by its IND-CCA security. While it is
+recommended that implementations avoid reuse of ML-KEM keypairs (also called
+'static' keys)<span>[<a href="#NIST-SP-800-227" class="cite xref">NIST-SP-800-227</a>]</span> to ensure forward secrecy, implementations
+that do reuse <span class="bcp14">MUST</span> ensure that the number of reuses abides by bounds in
+<span>[<a href="#FIPS203" class="cite xref">FIPS203</a>]</span> or subsequent security analyses of ML-KEM.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5"><span>[<a href="#NIST-SP-800-227" class="cite xref">NIST-SP-800-227</a>]</span> includes guidelines and requirements for implementations
 on using KEMs securely. Implementers are encouraged to use implementations
 resistant to side-channel attacks, especially those that can be applied by
-remote attackers.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="binding-properties">
-<section id="section-5.4">
-        <h3 id="name-binding-properties">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-binding-properties" class="section-name selfRef">Binding properties</a>
-        </h3>
-<p id="section-5.4-1">TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
+remote attackers.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the <code>key_exchange</code> field of the <code>key_share</code> extension is
 populated with those values, which are included as part of the handshake
 messages. This provides resilience against re-encapsulation attacks against
-KEMs used for key establishment <span>[<a href="#CDM23" class="cite xref">CDM23</a>]</span>.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+KEMs used for key establishment <span>[<a href="#CDM23" class="cite xref">CDM23</a>]</span>.<a href="#section-5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1639,6 +1601,14 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
         <dd>
 <span class="refAuthor">Cremers, C.</span>, <span class="refAuthor">Dax, A.</span>, and <span class="refAuthor">N. Medinger</span>, <span class="refTitle">"Keeping Up with the KEMs: Stronger Security Notions for KEMs and automated analysis of KEM-based protocols"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://eprint.iacr.org/2023/1933.pdf">https://eprint.iacr.org/2023/1933.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="CNSAFAQ">[CNSAFAQ]</dt>
+        <dd>
+<span class="refTitle">"The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ"</span>, <span>n.d.</span>, <span>&lt;<a href="https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF">https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CNSSP15">[CNSSP15]</dt>
+        <dd>
+<span class="refTitle">"USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&amp;b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4">https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&amp;b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="DOWLING">[DOWLING]</dt>
         <dd>
 <span class="refAuthor">Dowling, B.</span>, <span class="refAuthor">Fischlin, M.</span>, <span class="refAuthor">Günther, F.</span>, and <span class="refAuthor">D. Stebila</span>, <span class="refTitle">"A Cryptographic Analysis of the TLS 1.3 Handshake Protocol"</span>, <span class="refContent">Springer Science and Business Media LLC</span>, <span class="seriesInfo">Journal of Cryptology vol. 34, no. 4</span>, <span class="seriesInfo">DOI 10.1007/s00145-021-09384-1</span>, <time datetime="2021-07" class="refDate">July 2021</time>, <span>&lt;<a href="https://doi.org/10.1007/s00145-021-09384-1">https://doi.org/10.1007/s00145-021-09384-1</a>&gt;</span>. </dd>
@@ -1662,6 +1632,10 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <dt id="HYBRID">[HYBRID]</dt>
         <dd>
 <span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-16</span>, <time datetime="2025-09-07" class="refDate">7 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ITSP.40.111">[ITSP.40.111]</dt>
+        <dd>
+<span class="refTitle">"Cryptographic algorithms for UNCLASSIFIED, PROTECTED A, and PROTECTED B information - ITSP.40.111"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.cyber.gc.ca/en/guidance/cryptographic-algorithms-unclassified-protected-protected-b-information-itsp40111#a54">https://www.cyber.gc.ca/en/guidance/cryptographic-algorithms-unclassified-protected-protected-b-information-itsp40111#a54</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="KYBERV">[KYBERV]</dt>
         <dd>
@@ -1698,8 +1672,8 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla, and
-Rebecca Guthrie for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla,
+John Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
