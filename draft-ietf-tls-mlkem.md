@@ -129,10 +129,10 @@ FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}}
 key establishment via a lattice-based key encapsulation mechanism (KEM). This
 document defines key establishment options for TLS 1.3 that use solely
 post-quantum algorithms, without a hybrid construction that also includes a
-traditional cryptographic algorithm. Use cases include
-regulatory{{ITSP.40.111}} or policy frameworks{{CNSSP15}}{{CNSAFAQ}} that
-require standalone post-quantum key establishment, targeting smaller key
-sizes or less computation, and simplicity.
+traditional cryptographic algorithm. Use cases include requirements
+{{ITSP.40.111}}{{CNSSP15}}{{CNSAFAQ}} that require standalone post-quantum
+key establishment, targeting smaller key sizes or less computation, and
+simplicity.
 
 # Conventions and Definitions
 
