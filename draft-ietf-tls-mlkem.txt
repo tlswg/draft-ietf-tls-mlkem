@@ -4,8 +4,8 @@
 
 Transport Layer Security                                     D. Connolly
 Internet-Draft                                                 SandboxAQ
-Intended status: Informational                           3 November 2025
-Expires: 7 May 2026
+Intended status: Informational                          12 February 2026
+Expires: 16 August 2026
 
 
              ML-KEM Post-Quantum Key Agreement for TLS 1.3
@@ -48,11 +48,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2026.
+   This Internet-Draft will expire on 16 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -75,8 +75,10 @@ Table of Contents
      4.2.  Transmitting encapsulation keys and ciphertexts
      4.3.  Shared secret calculation
    5.  Security Considerations
-     5.1.  IND-CCA
-     5.2.  Binding properties
+     5.1.  Standalone versus hybrid key establishment
+     5.2.  IND-CCA
+     5.3.  Key reuse
+     5.4.  Binding properties
    6.  IANA Considerations
    7.  References
      7.1.  Normative References
@@ -89,11 +91,14 @@ Table of Contents
 1.1.  Motivation
 
    FIPS 203 (ML-KEM) [FIPS203] is a FIPS standard for post-quantum
-   [RFC9794] key establishment via lattice-based key establishment
-   mechanism (KEM).  Having a purely post-quantum (not hybrid) key
-   establishment option for TLS 1.3 is necessary for migrating beyond
-   hybrids and for users that want or need post-quantum security without
-   hybrids.
+   [RFC9794] key establishment via a lattice-based key encapsulation
+   mechanism (KEM).  This document defines key establishment options for
+   TLS 1.3 that use solely post-quantum algorithms, without a hybrid
+   construction that also includes a traditional cryptographic
+   algorithm.  Use cases include regulatory frameworks that require
+   standalone post-quantum key establishment, constrained environments
+   where smaller key sizes or less computation are needed, and
+   deployments where legacy middleboxes reject larger hybrid key shares.
 
 2.  Conventions and Definitions
 
@@ -184,18 +189,15 @@ Table of Contents
            KeyShareEntry server_share;
        } KeyShareServerHello;
 
-   The KeyShareClientHello includes a list of KeyShareEntry structs that
-   represent the key establishment algorithms the client supports.  For
-   each parameter of ML-KEM the client supports, the corresponding
-   KeyShareEntry consists of a NamedGroup that indicates the appropriate
-   parameter, and a key_exchange value that is the pk output of the
-   KeyGen algorithm.
+   The client's shares are listed in descending order of client
+   preference; the server selects one algorithm and sends its
+   corresponding share.
 
    For the client's share, the key_exchange value contains the pk output
-   of the corresponding KEM NamedGroup's KeyGen algorithm.
+   of the corresponding ML-KEM parameter set's KeyGen algorithm.
 
    For the server's share, the key_exchange value contains the ct output
-   of the corresponding KEM NamedGroup's Encaps algorithm.
+   of the corresponding ML-KEM parameter set's Encaps algorithm.
 
    For all parameter sets, the server MUST perform the encapsulation key
    check described in Section 7.2 of [FIPS203] on the client's
@@ -250,38 +252,56 @@ Table of Contents
 
 5.  Security Considerations
 
-5.1.  IND-CCA
+5.1.  Standalone versus hybrid key establishment
+
+   This document defines standalone ML-KEM key establishment for TLS
+   1.3.  Hybrid key establishment mechanisms, which combine a post-
+   quantum algorithm with a traditional algorithm such as ECDH, are
+   supported generically via [HYBRID] with some concrete definitions in
+   [ECDHE-MLKEM].  Hybrid mechanisms provide security as long as at
+   least one of the component algorithms remains unbroken, combining
+   both a lattice-based and a traditional cryptographic assumption.
+   Standalone ML-KEM relies on lattice-based and hash function
+   cryptographic assumptions for its security.
+
+5.2.  IND-CCA
 
    The main security property for KEMs is indistinguishability under
    adaptive chosen ciphertext attack (IND-CCA), which means that shared
    secret values should be indistinguishable from random strings even
    given the ability to have other arbitrary ciphertexts decapsulated.
    IND-CCA corresponds to security against an active attacker, and the
-   public key / secret key pair can be treated as a long-term key or
-   reused.  ML-KEM satisfies IND-CCA security in the random oracle model
-   [KYBERV].
+   public encapsulation key / secret decapsulation key pair can be
+   treated as a long-term key or reused.  ML-KEM satisfies IND-CCA
+   security in the random oracle model [KYBERV].
 
-   TLS 1.3 does not prohibit key re-use; some implementations may use
-   the same ephemeral public key for more than one key establishment at
-   the cost of limited forward secrecy.  Care must be taken to ensure
-   that keys are only re-used if the algorithms from which they are
-   derived are designed to be secure under key-reuse.  ML-KEM's IND-CCA
-   security satisfies this requirement such that the public key/secret
-   key pair can be used long-term or re-used without compromising the
-   security of the keys.  However, it is still recommended that
-   implementations avoid re-use of any keys (including ML-KEM keys) to
-   ensure perfect forward secrecy.
+5.3.  Key reuse
+
+   ML-KEM is explicitly designed to be secure in the event that the
+   keypair is reused, satisfying IND-CCA security via a variant of the
+   Fujisaki-Okamoto (FO) transform [FO][HHK].
+
+   While it is recommended that implementations avoid reuse of ML-KEM
+   keypairs to ensure forward secrecy, implementations that do reuse
+   MUST ensure that the number of reuses abides by bounds in [FIPS203]
+   or subsequent security analyses of ML-KEM.
 
    Implementations MUST NOT reuse randomness in the generation of ML-KEM
    ciphertexts.
 
-5.2.  Binding properties
+   [NIST-SP-800-227] includes guidelines and requirements for
+   implementations on using KEMs securely.  Implementers are encouraged
+   to use implementations resistant to side-channel attacks, especially
+   those that can be applied by remote attackers.
 
-   TLS 1.3's key schedule commits to the the ML-KEM encapsulation key
-   and the ciphertext as the key_exchange field as part of the key_share
-   extension are populated with those values are included as part of the
-   handshake messages, providing resilience against re-encapsulation
-   attacks against KEMs used for key establishment [CDM23].
+5.4.  Binding properties
+
+   TLS 1.3's key schedule commits to the ML-KEM encapsulation key and
+   the ciphertext as the key_exchange field of the key_share extension
+   is populated with those values, which are included as part of the
+   handshake messages.  This provides resilience against re-
+   encapsulation attacks against KEMs used for key establishment
+   [CDM23].
 
 6.  IANA Considerations
 
@@ -366,6 +386,14 @@ Table of Contents
               Cryptology vol. 34, no. 4, DOI 10.1007/s00145-021-09384-1,
               July 2021, <https://doi.org/10.1007/s00145-021-09384-1>.
 
+   [ECDHE-MLKEM]
+              Kwiatkowski, K., Kampanakis, P., Westerbaan, B., and D.
+              Stebila, "Post-quantum hybrid ECDHE-MLKEM Key Agreement
+              for TLSv1.3", Work in Progress, Internet-Draft, draft-
+              ietf-tls-ecdhe-mlkem-04, 8 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
+              ecdhe-mlkem-04>.
+
    [FO]       Fujisaki, E. and T. Okamoto, "Secure Integration of
               Asymmetric and Symmetric Encryption Schemes", Springer
               Science and Business Media LLC, Journal of Cryptology vol.
@@ -384,7 +412,7 @@ Table of Contents
               Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
               February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
-   [hybrid]   Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
+   [HYBRID]   Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
               exchange in TLS 1.3", Work in Progress, Internet-Draft,
               draft-ietf-tls-hybrid-design-16, 7 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
@@ -398,6 +426,13 @@ Table of Contents
               Breaking the TLS and DTLS record protocols", n.d.,
               <https://ieeexplore.ieee.org/
               iel7/6547086/6547088/06547131.pdf>.
+
+   [NIST-SP-800-227]
+              Alagic, G., Barker, E., Chen, L., Moody, D., Robinson, A.,
+              Silberg, H., and N. Waller, "Recommendations for key-
+              encapsulation mechanisms", National Institute of Standards
+              and Technology (U.S.), DOI 10.6028/nist.sp.800-227,
+              September 2025, <https://doi.org/10.6028/nist.sp.800-227>.
 
    [RACCOON]  Merget, R., Brinkmann, M., Aviram, N., Somorovsky, J.,
               Mittmann, J., and J. Schwenk, "Raccoon Attack: Finding and
