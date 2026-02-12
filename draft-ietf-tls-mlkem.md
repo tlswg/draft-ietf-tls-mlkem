@@ -122,9 +122,8 @@ key establishment via a lattice-based key encapsulation mechanism (KEM). This
 document defines key establishment options for TLS 1.3 that use solely
 post-quantum algorithms, without a hybrid construction that also includes a
 traditional cryptographic algorithm. Use cases include regulatory frameworks
-that require standalone post-quantum key establishment, constrained
-environments where smaller key sizes or less computation are needed, and
-deployments where legacy middleboxes reject larger hybrid key shares.
+that require standalone post-quantum key establishment, targeting smaller key
+sizes or less computation, and simplicity.
 
 # Conventions and Definitions
 
@@ -281,11 +280,11 @@ schedule in place of the (EC)DHE shared secret, as shown in
 This document defines standalone ML-KEM key establishment for TLS 1.3.
 Hybrid key establishment mechanisms, which combine a post-quantum algorithm
 with a traditional algorithm such as ECDH, are supported generically via
-{{HYBRID}} with some concrete definitions in {{ECDHE-MLKEM}}. Hybrid mechanisms
-provide security as long as at least one of the component algorithms remains
-unbroken, combining both a lattice-based and a traditional cryptographic
-assumption. Standalone ML-KEM relies on lattice-based and hash function
-cryptographic assumptions for its security.
+{{HYBRID}} with some concrete definitions in {{ECDHE-MLKEM}}. Hybrid
+mechanisms provide security as long as at least one of the component
+algorithms remains unbroken, combining quantum-resistant and traditional
+cryptographic assumptions. Standalone ML-KEM relies on lattice-based and hash
+function cryptographic assumptions for its security.
 
 ## IND-CCA
 
