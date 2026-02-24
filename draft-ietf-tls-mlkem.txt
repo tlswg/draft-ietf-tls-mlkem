@@ -4,8 +4,8 @@
 
 Transport Layer Security                                     D. Connolly
 Internet-Draft                                                 SandboxAQ
-Intended status: Informational                          12 February 2026
-Expires: 16 August 2026
+Intended status: Informational                          24 February 2026
+Expires: 28 August 2026
 
 
              ML-KEM Post-Quantum Key Agreement for TLS 1.3
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 August 2026.
+   This Internet-Draft will expire on 28 August 2026.
 
 Copyright Notice
 
@@ -167,30 +167,22 @@ Table of Contents
    encoded with fixed lengths as in [FIPS203].
 
    In TLS 1.3 a KEM public encapsulation key pk or ciphertext ct is
-   represented as a KeyShareEntry Section 4.2.8 of [RFC8446]:
-
-       struct {
-           NamedGroup group;
-           opaque key_exchange<1..2^16-1>;
-       } KeyShareEntry;
-
-   These are transmitted in the extension_data fields of
-   KeyShareClientHello and KeyShareServerHello extensions:
-
-       struct {
-           KeyShareEntry client_shares<0..2^16-1>;
-       } KeyShareClientHello;
-
-       struct {
-           KeyShareEntry server_share;
-       } KeyShareServerHello;
-
-   The client's shares are listed in descending order of client
-   preference; the server selects one algorithm and sends its
-   corresponding share.
+   represented as a KeyShareEntry as specified in Section 4.2.8 of
+   [RFC8446].  These are transmitted in the extension_data fields of
+   KeyShareClientHello and KeyShareServerHello extensions.
 
    For the client's share, the key_exchange value contains the pk output
    of the corresponding ML-KEM parameter set's KeyGen algorithm.
+
+   TLS 1.3 does not require that public keys be used only in a single
+   key exchange session; some implementations may reuse them, at the
+   cost of limited forward secrecy.  ML-KEM is explicitly designed to be
+   secure in the event that the keypair is reused by its IND-CCA
+   security.  While it is recommended that implementations avoid reuse
+   of ML-KEM keypairs (also called 'static' keys)[NIST-SP-800-227] to
+   ensure forward secrecy, implementations that do reuse MUST ensure
+   that the number of reuses abides by bounds in subsequent security
+   analyses of ML-KEM.
 
    For the server's share, the key_exchange value contains the ct output
    of the corresponding ML-KEM parameter set's Encaps algorithm.
@@ -207,49 +199,18 @@ Table of Contents
    If ML-KEM decapsulation fails for any other reason, the connection
    MUST be aborted with an internal_error alert.
 
-4.3.  Shared secret calculation
-
-   The shared secret output from the ML-KEM Encaps and Decaps algorithms
-   over the appropriate keypair and ciphertext results in the same
-   shared secret shared_secret as its honest peer, which is inserted
-   into the TLS 1.3 key schedule in place of the (EC)DHE shared secret,
-   as shown in Figure 1.
-
-                                       0
-                                       |
-                                       v
-                         PSK ->  HKDF-Extract = Early Secret
-                                       |
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-                                       |
-                                       v
-                                 Derive-Secret(., "derived", "")
-                                       |
-                                       v
-                shared_secret -> HKDF-Extract = Handshake Secret
-                ^^^^^^^^^^^^^          |
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-                                       |
-                                       v
-                                 Derive-Secret(., "derived", "")
-                                       |
-                                       v
-                            0 -> HKDF-Extract = Master Secret
-                                       |
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-                                       +-----> Derive-Secret(...)
-
-                Figure 1: Key schedule for key establishment
-
-5.  Security Considerations
-
    Implementations MUST NOT reuse randomness in the generation of ML-KEM
    ciphertexts— it follows that ciphertexts also MUST NOT be reused.
+
+4.3.  Shared secret calculation
+
+   The fixed-length shared secret output from the ML-KEM Encaps and
+   Decaps algorithms over the appropriate keypair and ciphertext results
+   in the same shared secret shared_secret as its peer, which is
+   inserted into the TLS 1.3 key schedule in place of the (EC)DHE shared
+   secret, as shown in Section 7.1 of [RFC8446].
+
+5.  Security Considerations
 
    This document defines standalone ML-KEM key establishment for TLS
    1.3.  Hybrid key establishment mechanisms, which support combining a
@@ -267,19 +228,14 @@ Table of Contents
    given the ability to have other arbitrary ciphertexts decapsulated.
    IND-CCA corresponds to security against an active attacker, and the
    public encapsulation key / secret decapsulation key pair can be
-   treated as a long-term key or reused.  ML-KEM satisfies IND-CCA
-   security in the random oracle model [KYBERV] via a variant of the
-   Fujisaki-Okamoto (FO) transform [FO][HHK].
-
-   TLS 1.3 does not require that ephemeral public keys be used only in a
-   single key exchange session; some implementations may reuse them, at
-   the cost of limited forward secrecy.  ML-KEM is explicitly designed
-   to be secure in the event that the keypair is reused by its IND-CCA
-   security.  While it is recommended that implementations avoid reuse
-   of ML-KEM keypairs (also called 'static' keys)[NIST-SP-800-227] to
-   ensure forward secrecy, implementations that do reuse MUST ensure
-   that the number of reuses abides by bounds in [FIPS203] or subsequent
-   security analyses of ML-KEM.
+   treated as a long-term key or reused in generic usage.  ML-KEM
+   satisfies IND-CCA security in the random oracle model [KYBERV] via a
+   variant of the Fujisaki-Okamoto (FO) transform [FO][HHK].  Use of
+   KEMs for key agreement in TLS 1.3 has been analyzed and discussed in
+   multiple settings and security models [DOWLING] [KEMTLS] [HV22]
+   [CHSW22] [CZCJWH25] [ZJZ24]: ML-KEM's IND-CCA security exceeds the
+   requirements for ephemeral key establisment and meets the
+   requirements in case of reuse.
 
    [NIST-SP-800-227] includes guidelines and requirements for
    implementations on using KEMs securely.  Implementers are encouraged
@@ -370,6 +326,11 @@ Table of Contents
               analysis of KEM-based protocols", 2023,
               <https://eprint.iacr.org/2023/1933.pdf>.
 
+   [CHSW22]   Celi, S., Hoyland, J., Stebila, D., and T. Wiggers, "A
+              Tale of Two Models: Formal Verification of KEMTLS via
+              Tamarin", Proceedings of ESORICS 2022 , 2022,
+              <https://doi.org/10.1007/978-3-031-17143-7_4>.
+
    [CNSAFAQ]  "The Commercial National Security Algorithm Suite 2.0 and
               Quantum Computing FAQ", n.d.,
               <https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/
@@ -381,11 +342,12 @@ Table of Contents
               115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
               >.
 
-   [DOWLING]  Dowling, B., Fischlin, M., Günther, F., and D. Stebila, "A
-              Cryptographic Analysis of the TLS 1.3 Handshake Protocol",
-              Springer Science and Business Media LLC, Journal of
-              Cryptology vol. 34, no. 4, DOI 10.1007/s00145-021-09384-1,
-              July 2021, <https://doi.org/10.1007/s00145-021-09384-1>.
+   [CZCJWH25] "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs}
+              with Tighter Reductions", n.d..
+
+   [DOWLING]  "A Cryptographic Analysis of the TLS 1.3 Handshake
+              Protocol", Journal of Cryptology 2021 , 2020,
+              <DOI.10.1007/s00145-021-09384-1>.
 
    [ECDHE-MLKEM]
               Kwiatkowski, K., Kampanakis, P., Westerbaan, B., and D.
@@ -413,6 +375,12 @@ Table of Contents
               Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
               February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
+   [HV22]     Huguenin-Dumittan, L. and S. Vaudenay, "On IND-qCCA
+              Security in the ROM and Its Applications - CPA Security Is
+              Sufficient for TLS 1.3", Proceedings of Eurocrypt 2022 ,
+              n.d., <https://link.springer.com/
+              chapter/10.1007/978-3-031-07082-2_22>.
+
    [HYBRID]   Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
               exchange in TLS 1.3", Work in Progress, Internet-Draft,
               draft-ietf-tls-hybrid-design-16, 7 September 2025,
@@ -425,6 +393,12 @@ Table of Contents
               <https://www.cyber.gc.ca/en/guidance/cryptographic-
               algorithms-unclassified-protected-protected-b-information-
               itsp40111#a54>.
+
+   [KEMTLS]   Schwabe, P., Stebila, D., and T. Wiggers, "Post-Quantum
+              TLS Without Handshake Signatures", ACM, Proceedings of the
+              2020 ACM SIGSAC Conference on Computer and Communications
+              Security pp. 1461-1480, DOI 10.1145/3372297.3423350,
+              October 2020, <https://doi.org/10.1145/3372297.3423350>.
 
    [KYBERV]   "Formally verifying Kyber Episode V: Machine-checked IND-
               CCA security and correctness of ML-KEM in EasyCrypt",
@@ -457,6 +431,11 @@ Table of Contents
               ietf-tls-rfc8447bis-15, 21 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
               rfc8447bis-15>.
+
+   [ZJZ24]    Zhou, B., Jiang, H., and Y. Zhao, "CPA-Secure KEMs are
+              also Sufficient for Post-quantum TLS 1.3", Proceedings of
+              Asiacrypt 2024 , n.d.,
+              <https://doi.org/10.1007/978-981-96-0891-1_14>.
 
 Acknowledgments
 
