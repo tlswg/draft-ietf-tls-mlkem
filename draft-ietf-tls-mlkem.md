@@ -293,7 +293,10 @@ generically via {{HYBRID}} with some concrete definitions in
 of the component algorithms remains unbroken, such as combining
 quantum-resistant and traditional cryptographic assumptions. Standalone
 ML-KEM relies on lattice-based and hash function cryptographic assumptions
-for its security.
+for its security. Proponents of hybrid PQ/T key establishment generally
+consider it a conservative approach to deployment of newer post-quantum
+schemes alongside older traditional schemes, retaining at least the security
+currently offered by traditional algorithms.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
