@@ -87,7 +87,7 @@ informative:
     target: https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
     title: "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"
   CZCJWH25:
-    target:
+    target: https://eprint.iacr.org/2025/1748.pdf
     title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
   DOWLING:
     target: DOI.10.1007/s00145-021-09384-1
@@ -96,6 +96,18 @@ informative:
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
   FO: DOI.10.1007/s00145-011-9114-1
+  GHS25:
+    target: https://eprint.iacr.org/2025/343.pdf
+    title: "On The Multi-target Security of Post-Quantum Key Encapsulation Mechanisms"
+    date: 2025
+    seriesinfo: "Cryptology ePrint Archive, Report 2025/343"
+    author:
+    -
+      name: Lewis Glabush
+    -
+      name: Kathrin Hovelmanns
+    -
+      name: Douglas Stebila
   HHK: DOI.10.1007/978-3-319-70500-2_12
   HV22:
     target: https://link.springer.com/chapter/10.1007/978-3-031-07082-2_22
@@ -142,6 +154,7 @@ informative:
       ins: J. Schwenk
     date: 2020-09
   RFC9794:
+  RFC8446bis: I-D.ietf-tls-rfc8446obis
   tlsiana: I-D.ietf-tls-rfc8447bis
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
@@ -249,15 +262,6 @@ represented as a `KeyShareEntry` as specified in {{Section 4.2.8 of
 For the client's share, the `key_exchange` value contains the `pk`
 output of the corresponding ML-KEM parameter set's `KeyGen` algorithm.
 
-TLS 1.3 does not require that public keys be used only in a single key
-exchange session; some implementations may reuse them, at the cost of limited
-forward secrecy. ML-KEM is explicitly designed to be secure in the event that
-the keypair is reused by its IND-CCA security. While it is recommended that
-implementations avoid reuse of ML-KEM keypairs (also called 'static'
-keys){{NIST-SP-800-227}} to ensure forward secrecy, implementations that do
-reuse MUST ensure that the number of reuses abides by bounds in subsequent
-security analyses of ML-KEM.
-
 For the server's share, the `key_exchange` value contains the `ct`
 output of the corresponding ML-KEM parameter set's `Encaps` algorithm.
 
@@ -273,7 +277,7 @@ If ML-KEM decapsulation fails for any other reason, the connection MUST be
 aborted with an `internal_error` alert.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
-ciphertexts— it follows that ciphertexts also MUST NOT be reused.
+ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be reused.
 
 ## Shared secret calculation {#construction-shared-secret}
 
@@ -309,8 +313,8 @@ generic usage. ML-KEM satisfies IND-CCA security in the random oracle model
 {{FO}}{{HHK}}. Use of KEMs for key agreement in TLS 1.3 has been analyzed and
 discussed in multiple settings and security models {{DOWLING}} {{KEMTLS}}
 {{HV22}} {{CHSW22}} {{CZCJWH25}} {{ZJZ24}}: ML-KEM's IND-CCA security exceeds
-the requirements for ephemeral key establisment and meets the requirements in
-case of reuse.
+the requirements for ephemeral key establishment and secure in case of reuse
+{{GHS25}} {{RFC8446bis}}.
 
 {{NIST-SP-800-227}} includes guidelines and requirements for implementations
 on using KEMs securely. Implementers are encouraged to use implementations
