@@ -4,8 +4,8 @@
 
 Transport Layer Security                                     D. Connolly
 Internet-Draft                                                 SandboxAQ
-Intended status: Informational                          24 February 2026
-Expires: 28 August 2026
+Intended status: Informational                              2 March 2026
+Expires: 3 September 2026
 
 
              ML-KEM Post-Quantum Key Agreement for TLS 1.3
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -220,7 +220,11 @@ Table of Contents
    least one of the component algorithms remains unbroken, such as
    combining quantum-resistant and traditional cryptographic
    assumptions.  Standalone ML-KEM relies on lattice-based and hash
-   function cryptographic assumptions for its security.
+   function cryptographic assumptions for its security.  Proponents of
+   hybrid PQ/T key establishment generally consider it a conservative
+   approach to deployment of newer post-quantum schemes alongside older
+   traditional schemes, retaining at least the security currently
+   offered by traditional algorithms.
 
    The main security property for KEMs is indistinguishability under
    adaptive chosen ciphertext attack (IND-CCA), which means that shared
