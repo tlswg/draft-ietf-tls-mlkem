@@ -154,7 +154,7 @@ informative:
       ins: J. Schwenk
     date: 2020-09
   RFC9794:
-  RFC8446bis: I-D.ietf-tls-rfc8446obis
+  RFC8446bis: I-D.ietf-tls-rfc8446bis
   tlsiana: I-D.ietf-tls-rfc8447bis
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
@@ -179,16 +179,11 @@ in TLS 1.3 to achieve post-quantum (PQ) key establishment.
 
 # Introduction
 
-## Motivation
-
-FIPS 203 (ML-KEM) {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}}
-key establishment via a lattice-based key encapsulation mechanism (KEM). This
-document defines key establishment options for TLS 1.3 that use solely
-post-quantum algorithms, without a hybrid construction that also includes a
-traditional cryptographic algorithm. Use cases include requirements
-{{ITSP.40.111}}{{CNSSP15}}{{CNSAFAQ}} that require standalone post-quantum
-key establishment, targeting smaller key sizes or less computation, and
-simplicity.
+ML-KEM {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}} key
+establishment via a lattice-based key encapsulation mechanism (KEM). This
+document defines key establishment options for TLS 1.3 via the existing
+`supported_groups` {{Section 4.2.7 of !RFC8446bis}} and `key_share` {{Section
+4.2.8 of !RFC8446bis}} extensions.
 
 # Conventions and Definitions
 
