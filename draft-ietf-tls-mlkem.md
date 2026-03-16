@@ -154,7 +154,7 @@ informative:
       ins: J. Schwenk
     date: 2020-09
   RFC9794:
-  RFC8446bis: I-D.ietf-tls-rfc8446bis
+  RFC8446bis: I-D.ietf-tls-rfc8446obis
   tlsiana: I-D.ietf-tls-rfc8447bis
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
