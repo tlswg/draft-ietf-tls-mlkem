@@ -32,6 +32,9 @@ normative:
   FIPS203: DOI.10.6028/NIST.FIPS.203
 
 informative:
+  TLSREG:
+    target: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    title: "TLS Supported Groups"
   AVIRAM:
     target: https://mailarchive.ietf.org/arch/msg/tls/F4SVeL2xbGPaPB2GW_GkBbD_a5M/
     title: "[TLS] Combining Secrets in Hybrid Key Exchange in TLS 1.3"
@@ -283,33 +286,6 @@ of !RFC8446}}.
 
 # Security Considerations {#security-considerations}
 
-This document defines standalone ML-KEM key establishment for TLS 1.3.
-Hybrid key establishment mechanisms, which support combining a post-quantum
-algorithm with a traditional algorithm such as ECDH, are supported
-generically via {{HYBRID}} with some concrete definitions in
-{{ECDHE-MLKEM}}. Hybrid mechanisms provide security as long as at least one
-of the component algorithms remains unbroken, such as combining
-quantum-resistant and traditional cryptographic assumptions. Standalone
-ML-KEM relies on lattice-based and hash function cryptographic assumptions
-for its security. Proponents of hybrid PQ/T key establishment generally
-consider it a conservative approach to deployment of newer post-quantum
-schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms.
-
-The main security property for KEMs is indistinguishability under adaptive
-chosen ciphertext attack (IND-CCA), which means that shared secret values
-should be indistinguishable from random strings even given the ability to
-have other arbitrary ciphertexts decapsulated. IND-CCA corresponds to
-security against an active attacker, and the public encapsulation key /
-secret decapsulation key pair can be treated as a long-term key or reused in
-generic usage. ML-KEM satisfies IND-CCA security in the random oracle model
-{{KYBERV}} via a variant of the Fujisaki-Okamoto (FO) transform
-{{FO}}{{HHK}}. Use of KEMs for key agreement in TLS 1.3 has been analyzed and
-discussed in multiple settings and security models {{DOWLING}} {{KEMTLS}}
-{{HV22}} {{CHSW22}} {{CZCJWH25}} {{ZJZ24}}: ML-KEM's IND-CCA security exceeds
-the requirements for ephemeral key establishment and secure in case of reuse
-{{GHS25}} {{RFC8446bis}}.
-
 {{NIST-SP-800-227}} includes guidelines and requirements for implementations
 on using KEMs securely. Implementers are encouraged to use implementations
 resistant to side-channel attacks, especially those that can be applied by
@@ -320,6 +296,21 @@ ciphertext as the `key_exchange` field of the `key_share` extension is
 populated with those values, which are included as part of the handshake
 messages. This provides resilience against re-encapsulation attacks against
 KEMs used for key establishment {{CDM23}}.
+
+This document defines standalone ML-KEM key establishment for TLS 1.3.
+A hybrid combines a traditional algorithm such as
+ECDH with a post-quantum algorithm such as ML-KEM.
+The IETF is working on an RFC that defines several hybrid key
+extablishment mechanism, each combining a tradition ECDHE curve with
+ML-KEM in {{ECDHE-MLKEM}}.
+
+Both documents have IANA registry entries with an `N` in the recommended
+column. Quoting from the registry {{TLSREG}}, "\[this] does not necessarily mean that
+it is flawed; rather, it indicates that the item ... has limited
+applicability, or is intended only for specific use cases."
+Those developing or deploying TLS 1.3 with either encapsulation method
+will have to determine the security and operational considerations
+when choosing which mechanism to support.
 
 # IANA Considerations
 
