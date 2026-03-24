@@ -299,9 +299,9 @@ KEMs used for key establishment {{CDM23}}.
 
 This document defines standalone ML-KEM key establishment for TLS 1.3.
 A hybrid combines a traditional algorithm such as
-ECDH with a post-quantum algorithm such as ML-KEM.
+Elliptic Curve Diffie-Hellman (ECDH) with a post-quantum algorithm such as ML-KEM.
 The IETF is working on an RFC that defines several hybrid key
-establishment mechanism, each combining an ECDHE curve with
+establishment mechanism, each combining ECDH key agreement with
 ML-KEM in {{ECDHE-MLKEM}}.
 
 Both documents have IANA registry entries with an `N` in the recommended
