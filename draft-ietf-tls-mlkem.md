@@ -118,7 +118,7 @@ informative:
     seriesinfo: Proceedings of Eurocrypt 2022
     author:
     -
-      name: Loïs Huguenin-Dumittan
+      name: LoÃ¯s Huguenin-Dumittan
     -
       name: Serge Vaudenay
   HPKE: RFC9180
@@ -274,7 +274,7 @@ If ML-KEM decapsulation fails for any other reason, the connection MUST be
 aborted with an `internal_error` alert.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
-ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be reused.
+ciphertextsâ it follows that ML-KEM ciphertexts also MUST NOT be reused.
 
 ## Shared secret calculation {#construction-shared-secret}
 
@@ -386,3 +386,4 @@ tlsiana}}.
 Thanks to Douglas Stebila for consultation on the
 draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla,
 John Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
+Rich Salz wrote the final draft of the security considerations section.
