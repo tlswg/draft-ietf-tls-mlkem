@@ -162,7 +162,7 @@ If ML-KEM decapsulation fails for any other reason, the connection MUST be
 aborted with an `internal_error` alert.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
-ciphertextsâ it follows that ML-KEM ciphertexts also MUST NOT be reused.
+ciphertexts, it follows that ML-KEM ciphertexts also MUST NOT be reused.
 
 ## Shared secret calculation {#construction-shared-secret}
 
