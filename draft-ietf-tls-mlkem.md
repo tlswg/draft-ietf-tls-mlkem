@@ -32,23 +32,9 @@ normative:
   FIPS203: DOI.10.6028/NIST.FIPS.203
 
 informative:
-  AVIRAM:
-    target: https://mailarchive.ietf.org/arch/msg/tls/F4SVeL2xbGPaPB2GW_GkBbD_a5M/
-    title: "[TLS] Combining Secrets in Hybrid Key Exchange in TLS 1.3"
-    date: 2021-09-01
-    author:
-      -
-        ins: Nimrod Aviram
-      -
-        ins: Benjamin Dowling
-      -
-        ins: Ilan Komargodski
-      -
-        ins: Kenny Paterson
-      -
-        ins: Eyal Ronen
-      -
-        ins: Eylon Yogev
+  TLSREG:
+    target: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    title: "TLS Supported Groups"
   CDM23:
     title: "Keeping Up with the KEMs: Stronger Security Notions for KEMs and automated analysis of KEM-based protocols"
     target: https://eprint.iacr.org/2023/1933.pdf
@@ -66,107 +52,12 @@ informative:
         ins: N. Medinger
         name: Niklas Medinger
         org: CISPA Helmholtz Center for Information Security
-  CHSW22:
-    target: https://doi.org/10.1007/978-3-031-17143-7_4
-    title: "A Tale of Two Models: Formal Verification of KEMTLS via Tamarin"
-    date: 2022
-    seriesinfo: "Proceedings of ESORICS 2022"
-    author:
-    -
-      ins: S. Celi
-    -
-      ins: J. Hoyland
-    -
-      ins: D. Stebila
-    -
-      ins: T. Wiggers
-  CNSAFAQ:
-    target: https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF
-    title: "The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ"
-  CNSSP15:
-    target: https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
-    title: "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"
-  CZCJWH25:
-    target: https://eprint.iacr.org/2025/1748.pdf
-    title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
-  DOWLING:
-    target: DOI.10.1007/s00145-021-09384-1
-    title: "A Cryptographic Analysis of the TLS 1.3 Handshake Protocol"
-    date: 2020
-    seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
-  FO: DOI.10.1007/s00145-011-9114-1
-  GHS25:
-    target: https://eprint.iacr.org/2025/343.pdf
-    title: "On The Multi-target Security of Post-Quantum Key Encapsulation Mechanisms"
-    date: 2025
-    seriesinfo: "Cryptology ePrint Archive, Report 2025/343"
-    author:
-    -
-      name: Lewis Glabush
-    -
-      name: Kathrin Hovelmanns
-    -
-      name: Douglas Stebila
-  HHK: DOI.10.1007/978-3-319-70500-2_12
-  HV22:
-    target: https://link.springer.com/chapter/10.1007/978-3-031-07082-2_22
-    title: "On IND-qCCA Security in the ROM and Its Applications - CPA Security Is Sufficient for TLS 1.3"
-    seriesinfo: Proceedings of Eurocrypt 2022
-    author:
-    -
-      name: Loïs Huguenin-Dumittan
-    -
-      name: Serge Vaudenay
   HPKE: RFC9180
   HYBRID: I-D.ietf-tls-hybrid-design
-  ITSP.40.111:
-    target: "https://www.cyber.gc.ca/en/guidance/cryptographic-algorithms-unclassified-protected-protected-b-information-itsp40111#a54"
-    title: "Cryptographic algorithms for UNCLASSIFIED, PROTECTED A, and PROTECTED B information - ITSP.40.111"
-  KEMTLS: DOI.10.1145/3372297.3423350
-  KYBERV:
-    target: https://eprint.iacr.org/2024/843.pdf
-    title: "Formally verifying Kyber Episode V: Machine-checked IND-CCA security and correctness of ML-KEM in EasyCrypt"
-  LUCKY13:
-    target: https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf
-    title: "Lucky Thirteen: Breaking the TLS and DTLS record protocols"
-    author:
-    -
-      ins: N. J. Al Fardan
-    -
-      ins: K. G. Paterson
   NIST-SP-800-227: DOI.10.6028/NIST.SP.800-227
-  RACCOON:
-    target: https://raccoon-attack.com/
-    title: "Raccoon Attack: Finding and Exploiting Most-Significant-Bit-Oracles in TLS-DH(E)"
-    author:
-    -
-      ins: R. Merget
-    -
-      ins: M. Brinkmann
-    -
-      ins: N. Aviram
-    -
-      ins: J. Somorovsky
-    -
-      ins: J. Mittmann
-    -
-      ins: J. Schwenk
-    date: 2020-09
   RFC9794:
-  tlsiana: I-D.ietf-tls-rfc8447bis
-  ZJZ24:
-    target: https://doi.org/10.1007/978-981-96-0891-1_14
-
-    title: "CPA-Secure KEMs are also Sufficient for Post-quantum TLS 1.3"
-    seriesinfo: Proceedings of Asiacrypt 2024
-    author:
-    -
-      ins: B. Zhou
-    -
-      ins: H.Jiang
-    -
-      ins: Y. Zhao
+  TLSIANA: I-D.ietf-tls-rfc8447bis
 
 --- abstract
 
@@ -271,7 +162,7 @@ If ML-KEM decapsulation fails for any other reason, the connection MUST be
 aborted with an `internal_error` alert.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
-ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be reused.
+ciphertexts, it follows that ML-KEM ciphertexts also MUST NOT be reused.
 
 ## Shared secret calculation {#construction-shared-secret}
 
@@ -282,33 +173,6 @@ key schedule in place of the (EC)DHE shared secret, as shown in {{Section 7.1
 of !RFC8446}}.
 
 # Security Considerations {#security-considerations}
-
-This document defines standalone ML-KEM key establishment for TLS 1.3.
-Hybrid key establishment mechanisms, which support combining a post-quantum
-algorithm with a traditional algorithm such as ECDH, are supported
-generically via {{HYBRID}} with some concrete definitions in
-{{ECDHE-MLKEM}}. Hybrid mechanisms provide security as long as at least one
-of the component algorithms remains unbroken, such as combining
-quantum-resistant and traditional cryptographic assumptions. Standalone
-ML-KEM relies on lattice-based and hash function cryptographic assumptions
-for its security. Proponents of hybrid PQ/T key establishment generally
-consider it a conservative approach to deployment of newer post-quantum
-schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms.
-
-The main security property for KEMs is indistinguishability under adaptive
-chosen ciphertext attack (IND-CCA), which means that shared secret values
-should be indistinguishable from random strings even given the ability to
-have other arbitrary ciphertexts decapsulated. IND-CCA corresponds to
-security against an active attacker, and the public encapsulation key /
-secret decapsulation key pair can be treated as a long-term key or reused in
-generic usage. ML-KEM satisfies IND-CCA security in the random oracle model
-{{KYBERV}} via a variant of the Fujisaki-Okamoto (FO) transform
-{{FO}}{{HHK}}. Use of KEMs for key agreement in TLS 1.3 has been analyzed and
-discussed in multiple settings and security models {{DOWLING}} {{KEMTLS}}
-{{HV22}} {{CHSW22}} {{CZCJWH25}} {{ZJZ24}}: ML-KEM's IND-CCA security exceeds
-the requirements for ephemeral key establishment and secure in case of reuse
-{{GHS25}} {{RFC8446bis}}.
 
 {{NIST-SP-800-227}} includes guidelines and requirements for implementations
 on using KEMs securely. Implementers are encouraged to use implementations
@@ -321,11 +185,27 @@ populated with those values, which are included as part of the handshake
 messages. This provides resilience against re-encapsulation attacks against
 KEMs used for key establishment {{CDM23}}.
 
+This document defines standalone ML-KEM key establishment for TLS 1.3.
+A PQ/T hybrid combines
+a post-quantum algorithm such as ML-KEM.
+with a traditional algorithm such as
+Elliptic Curve Diffie-Hellman (ECDH)
+The IETF is working on an RFC that defines several such key
+establishment mechanisms, ML-KEM with a combining ECDH in {{ECDHE-MLKEM}}.
+
+Both documents have IANA registry entries with an `N` in the recommended
+column. Quoting from the registry {{TLSREG}}, "\[this] does not necessarily mean that
+it is flawed; rather, it indicates that the item ... has limited
+applicability, or is intended only for specific use cases."
+Those developing or deploying TLS 1.3 with either encapsulation method
+will have to determine the security and operational considerations
+when choosing which mechanism to support.
+
 # IANA Considerations
 
 This document requests/registers three new entries to the TLS Named Group (or
 Supported Group) registry, according to the procedures in {{Section 6 of
-tlsiana}}.
+TLSIANA}}.
 
 
  Value:
@@ -393,5 +273,6 @@ tlsiana}}.
 {:numbered="false"}
 
 Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla,
+{{HYBRID}} design, and to Scott Fluhrer, Eric Rescorla,
 John Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
+Rich Salz wrote the final draft of the security considerations section.
