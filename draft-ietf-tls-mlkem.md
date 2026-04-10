@@ -287,7 +287,9 @@ This document defines standalone ML-KEM key establishment for TLS 1.3.
 Hybrid key establishment mechanisms, which support combining a post-quantum
 algorithm with a traditional algorithm such as ECDH, are supported
 generically via {{HYBRID}} with some concrete definitions in
-{{ECDHE-MLKEM}}. Hybrid approaches, such as such as combining quantum-resistant and traditional cryptographic assumptions, provide security as long as at least one
+{{ECDHE-MLKEM}}. Hybrid approaches, such as such as combining
+quantum-resistant and traditional cryptographic assumptions, provide
+security as long as at least one
 of the component algorithms remains unbroken. Standalone
 ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
