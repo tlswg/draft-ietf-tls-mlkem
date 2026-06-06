@@ -95,6 +95,16 @@ informative:
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
+  FATT:
+    target: https://eprint.iacr.org/2026/xxxx
+    title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
+    date: 2026
+    seriesinfo: "Cryptology ePrint Archive, Report 2026/xxxx"
+    author:
+    -
+      ins: N. Kobeissi
+      name: Nadim Kobeissi
+      org: Symbolic Software
   FO: DOI.10.1007/s00145-011-9114-1
   GHS25:
     target: https://eprint.iacr.org/2025/343.pdf
@@ -294,7 +304,9 @@ ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms.
+currently offered by traditional algorithms. Machine-checked symbolic
+analysis of standalone ML-KEM, hybrid, and traditional key exchange in
+TLS 1.3 supports preferring hybrid key establishment {{FATT}}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
