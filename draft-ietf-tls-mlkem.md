@@ -167,6 +167,16 @@ informative:
       ins: H.Jiang
     -
       ins: Y. Zhao
+  FATT-Chance:
+    target: https://eprint.iacr.org/2026/xxxx
+    title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
+    date: 2026
+    seriesinfo: "Cryptology ePrint Archive, Report 2026/xxxx"
+    author:
+    -
+      ins: N. Kobeissi
+      name: Nadim Kobeissi
+      org: Symbolic Software
 
 --- abstract
 
@@ -289,14 +299,12 @@ algorithm with a traditional algorithm such as ECDH, are supported
 generically via {{HYBRID}} with some concrete definitions in
 {{ECDHE-MLKEM}}. Hybrid mechanisms provide security as long as at least one
 of the component algorithms remains unbroken, such as combining
-quantum-resistant and traditional cryptographic assumptions. Standalone
+quantum-resistant and traditional cryptographic assumptions {{FATT-Chance}}. Standalone
 ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms. The WG currently recommends
-only X25519MLKEM768 over other alternatives, including standalone ML-KEM,
-as seen in the RECOMMENDED field.
+currently offered by traditional algorithms.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
@@ -322,6 +330,11 @@ ciphertext as the `key_exchange` field of the `key_share` extension is
 populated with those values, which are included as part of the handshake
 messages. This provides resilience against re-encapsulation attacks against
 KEMs used for key establishment {{CDM23}}.
+
+Machine-checked symbolic analysis using ProVerif {{FATT-Chance}} shows that
+KEM-based key exchange in TLS 1.3 is secure. {{FATT-Chance}} also shows
+that a compromise of the key exchange also compromises handshake
+authentication, not just confidentiality.
 
 # IANA Considerations
 
