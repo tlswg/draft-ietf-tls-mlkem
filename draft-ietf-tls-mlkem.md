@@ -305,8 +305,14 @@ for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
 currently offered by traditional algorithms. Machine-checked symbolic
-analysis of standalone ML-KEM, hybrid, and traditional key exchange in
-TLS 1.3 supports preferring hybrid key establishment {{FATT}}.
+analysis of standalone ML-KEM, hybrid, and traditional key establishment,
+composed concurrently under a single active attacker, confirms that hybrid
+key establishment remains secure as long as either component is unbroken,
+whereas the security of standalone ML-KEM rests on ML-KEM alone. The same
+analysis finds that this singe point of failure reaches handshake
+authentication: absent a secret pre-shared key, compromise of the sole
+key-establishment secret makes the server Finished forgeable, which the
+hybrid likewise resists {{FATT}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
