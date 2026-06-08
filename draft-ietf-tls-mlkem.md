@@ -332,7 +332,8 @@ messages. This provides resilience against re-encapsulation attacks against
 KEMs used for key establishment {{CDM23}}.
 
 Machine-checked symbolic analysis using ProVerif {{FATT-Chance}} shows that
-KEM-based key exchange in TLS 1.3 is secure. {{FATT-Chance}} also shows
+integration of KEM-based key exchange in TLS 1.3 is secure as long as the
+cryptographic primitive itself is secure. {{FATT-Chance}} also shows
 that a compromise of the key exchange also compromises handshake
 authentication, not just confidentiality.
 
