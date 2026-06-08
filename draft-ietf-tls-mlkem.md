@@ -96,10 +96,10 @@ informative:
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
   FATT:
-    target: https://eprint.iacr.org/2026/xxxx
+    target: https://eprint.iacr.org/2026/1147
     title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
     date: 2026
-    seriesinfo: "Cryptology ePrint Archive, Report 2026/xxxx"
+    seriesinfo: "Cryptology ePrint Archive, Report 2026/1147"
     author:
     -
       ins: N. Kobeissi
