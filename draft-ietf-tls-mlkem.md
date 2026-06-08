@@ -312,7 +312,7 @@ whereas the security of standalone ML-KEM rests on ML-KEM alone. The same
 analysis finds that this singe point of failure reaches handshake
 authentication: absent a secret pre-shared key, compromise of the sole
 key-establishment secret makes the server Finished forgeable, which the
-hybrid likewise resists {{FATT}.
+hybrid likewise resists {{FATT}}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
