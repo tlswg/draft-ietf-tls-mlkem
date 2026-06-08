@@ -294,9 +294,9 @@ ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms. The WG currently recommends
-only X25519MLKEM768 over other alternatives, including standalone ML-KEM,
-as seen in the RECOMMENDED field.
+currently offered by traditional algorithms. Among the quantum-secure
+algorithms, the WG currently recommends only X25519MLKEM768 over other
+alternatives, including standalone ML-KEM, as seen in the RECOMMENDED field.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
