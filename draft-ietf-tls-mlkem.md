@@ -95,7 +95,7 @@ informative:
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
-  FATT:
+  FATT-CHANCE:
     target: https://eprint.iacr.org/2026/1147
     title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
     date: 2026
@@ -312,7 +312,7 @@ whereas the security of standalone ML-KEM rests on ML-KEM alone. The same
 analysis finds that this singe point of failure reaches handshake
 authentication: absent a secret pre-shared key, compromise of the sole
 key-establishment secret makes the server Finished forgeable, which the
-hybrid likewise resists {{FATT}}.
+hybrid likewise resists {{FATT-CHANCE}}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
