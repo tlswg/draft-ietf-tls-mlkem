@@ -49,6 +49,18 @@ informative:
         ins: Eyal Ronen
       -
         ins: Eylon Yogev
+  BJ24:
+    target: https://bblanche.gitlabpages.inria.fr/publications/BlanchetJacommeCSF24.pdf
+    title: "Post-Quantum Sound CryptoVerif and Verification of Hybrid TLS and SSH Key-Exchanges"
+    date: 2024
+    seriesinfo: "Proceedings of CSF 2024"
+    author:
+    -
+      ins: B. Blanchet
+      name: Bruno Blanchet
+    -
+      ins: C. Jacomme
+      name: Charlie Jacomme
   CDM23:
     title: "Keeping Up with the KEMs: Stronger Security Notions for KEMs and automated analysis of KEM-based protocols"
     target: https://eprint.iacr.org/2023/1933.pdf
@@ -86,6 +98,24 @@ informative:
   CNSSP15:
     target: https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
     title: "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"
+  CPWB25:
+    target: https://doi.org/10.3390/e27121242
+    title: "On the Security and Efficiency of TLS 1.3 Handshake with Hybrid Key Exchange from CPA-Secure KEMs"
+    date: 2025
+    seriesinfo: "Entropy 27(12):1242"
+    author:
+    -
+      ins: J. Chen
+      name: Jinrong Chen
+    -
+      ins: W. Peng
+      name: Wei Peng
+    -
+      ins: Y. Wang
+      name: Yi Wang
+    -
+      ins: Y. Bian
+      name: Yutong Bian
   CZCJWH25:
     target: https://eprint.iacr.org/2025/1748.pdf
     title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
@@ -95,6 +125,16 @@ informative:
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
+  FATT-CHANCE:
+    target: https://eprint.iacr.org/2026/1147
+    title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
+    date: 2026
+    seriesinfo: "Cryptology ePrint Archive, Report 2026/1147"
+    author:
+    -
+      ins: N. Kobeissi
+      name: Nadim Kobeissi
+      org: Symbolic Software
   FO: DOI.10.1007/s00145-011-9114-1
   GHS25:
     target: https://eprint.iacr.org/2025/343.pdf
@@ -294,7 +334,9 @@ ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms.
+currently offered by traditional algorithms. This is supported by a number of
+security analyses, using both mechanised and pen-and-paper methods
+{{FATT-CHANCE}} {{BJ24}} {{CPWB25}}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
