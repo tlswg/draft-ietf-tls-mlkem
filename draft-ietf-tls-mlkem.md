@@ -334,7 +334,9 @@ ML-KEM relies on lattice-based and hash function cryptographic assumptions
 for its security. Proponents of hybrid PQ/T key establishment generally
 consider it a conservative approach to deployment of newer post-quantum
 schemes alongside older traditional schemes, retaining at least the security
-currently offered by traditional algorithms. This is supported by a number of security analyses, using both mechanised and pen-and-paper methods {{FATT-CHANCE}} {{BJ24}} {{CPWB25}}.
+currently offered by traditional algorithms. This is supported by a number of
+security analyses, using both mechanised and pen-and-paper methods
+{{FATT-CHANCE}} {{BJ24}} {{CPWB25}}.
 
 The main security property for KEMs is indistinguishability under adaptive
 chosen ciphertext attack (IND-CCA), which means that shared secret values
