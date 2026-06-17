@@ -325,7 +325,17 @@ TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field of the `key_share` extension is
 populated with those values, which are included as part of the handshake
 messages. This provides resilience against re-encapsulation attacks against
-KEMs used for key establishment {{CDM23}}.
+This document defines standalone ML-KEM key establishment for TLS 1.3.  Use of KEMs for key agreement in TLS 1.3 has been analyzed and
+discussed in multiple settings and security models {{DOWLING}} {{KEMTLS}}
+{{HV22}} {{CHSW22}} {{CZCJWH25}} {{ZJZ24}}: ML-KEM's IND-CCA security exceeds
+the requirements for ephemeral key establishment
+{{GHS25}} {{RFC8446bis}}. Multiple formal analyses, including pen-and-paper computational proofs and machine-checked symbolic analysis using ProVerif {ref ?}, demonstrate that replacing Diffie-Hellman with an IND-CCA secure KEM preserves the security properties of the TLS handshake. Formal analysis has also shown that hybrid key establishment (e.g., {{draft-ietf-tls-ecdhe-mklem}}) provides compositional security; the exchange remains secure as long as at least one of the component algorithms is unbroken. 
+
+TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the ciphertext as the key_exchange field of the key_share extension is populated with those values, which are included as part of the handshake messages. This provides resilience against re-encapsulation attacks against KEMs used for key establishment {{CDM23}}.
+
+{{NIST-SP-800-227}} includes guidelines and requirements for implementations on using KEMs securely. Implementers are encouraged to use implementations resistant to side-channel attacks, especially those that can be applied by remote attackers.
+
+Implementers must evaluate their specific security, performance, and operational constraints when deciding whether to deploy standalone ML-KEM or a hybrid construction. The recommended column in the IANA TLS Supported Groups registry contains the IETF's current guidance on the recommended use of these algorithms for general purposes.
 
 # IANA Considerations
 
