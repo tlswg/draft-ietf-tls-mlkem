@@ -123,6 +123,9 @@ informative:
   ITSP.40.111:
     target: "https://www.cyber.gc.ca/en/guidance/cryptographic-algorithms-unclassified-protected-protected-b-information-itsp40111#a54"
     title: "Cryptographic algorithms for UNCLASSIFIED, PROTECTED A, and PROTECTED B information - ITSP.40.111"
+  KOBEISSI26:
+    target: "https://eprint.iacr.org/2026/1147.pdf"
+    title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
   KEMTLS: DOI.10.1145/3372297.3423350
   KYBERV:
     target: https://eprint.iacr.org/2024/843.pdf
@@ -284,18 +287,17 @@ of !RFC8446}}.
 # Security Considerations {#security-considerations}
 
 This document defines standalone ML-KEM key establishment for TLS 1.3.  Use
-of KEMs for key agreement in TLS 1.3 has been analyzed and discussed in
-multiple settings and security models {{DOWLING}} {{KEMTLS}} {{HV22}}
-{{CHSW22}} {{CZCJWH25}} {{ZJZ24}}: ML-KEM's IND-CCA security exceeds the
-requirements for ephemeral key establishment {{GHS25}}
-{{RFC8446bis}}. Multiple formal analyses, including pen-and-paper
-computational proofs and machine-checked symbolic analysis using ProVerif
-{ref ?}, demonstrate that replacing Diffie-Hellman with an IND-CCA secure KEM
-preserves the security properties of the TLS handshake. Formal analysis has
-also shown that hybrid key establishment (e.g.,
-{{draft-ietf-tls-ecdhe-mklem}}) provides compositional security; the exchange
-remains secure as long as at least one of the component algorithms is
-unbroken.
+of KEMs for key agreement in TLS 1.3 has been analyzed in multiple settings
+and security models {{DOWLING}} {{KEMTLS}} {{HV22}} {{CHSW22}} {{CZCJWH25}}
+{{ZJZ24}}; ML-KEM's IND-CCA security exceeds the requirements for ephemeral
+key establishment {{GHS25}} {{RFC8446bis}}. Multiple formal analyses,
+including pen-and-paper computational proofs and machine-checked symbolic
+analysis using ProVerif {KOBEISSI26}, demonstrate that replacing
+Diffie-Hellman with an IND-CCA-secure KEM preserves the security properties
+of the TLS handshake. Formal analysis has also shown that hybrid key
+establishment (e.g., {{draft-ietf-tls-ecdhe-mklem}}) provides compositional
+security; the exchange remains secure as long as at least one of the
+component algorithms is unbroken.
 
 TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field of the `key_share` extension is
