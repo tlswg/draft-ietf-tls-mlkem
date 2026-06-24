@@ -384,7 +384,7 @@ Table of Contents
 Acknowledgments
 
    Thanks to Douglas Stebila for consultation on the draft-ietf-tls-
-   hybrid-design design, and to Scott Fluhrer, Eric Rescorla, John
+   hybrid-design design, and to Scott Fluhrer, Eric Rescorla, John Preuß
    Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
 
 Author's Address
