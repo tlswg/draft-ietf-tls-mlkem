@@ -120,7 +120,7 @@ informative:
     target: https://eprint.iacr.org/2025/1748.pdf
     title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
   DOWLING:
-    target: DOI.10.1007/s00145-021-09384-1
+    target: https://doi.org/10.1007/s00145-021-09384-1
     title: "A Cryptographic Analysis of the TLS 1.3 Handshake Protocol"
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
