@@ -130,10 +130,8 @@ informative:
   KEMTLS: DOI.10.1145/3372297.3423350
   NIST-SP-800-227: DOI.10.6028/NIST.SP.800-227
   RFC9794:
-  tlsiana: I-D.ietf-tls-rfc8447bis
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
-
     title: "CPA-Secure KEMs are also Sufficient for Post-quantum TLS 1.3"
     seriesinfo: Proceedings of Asiacrypt 2024
     author:
@@ -293,7 +291,7 @@ of these algorithms for general purposes.
 
 This document requests/registers three new entries to the TLS Named Group (or
 Supported Group) registry, according to the procedures in {{Section 6 of
-tlsiana}}.
+!RFC9847}}.
 
 
  Value:
