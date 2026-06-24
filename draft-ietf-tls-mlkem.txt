@@ -14,7 +14,7 @@ Expires: 26 December 2026
 Abstract
 
    This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as
-   NamedGroups and and registers IANA values in the TLS Supported Groups
+   NamedGroups and registers IANA values in the TLS Supported Groups
    registry for use in TLS 1.3 to achieve post-quantum (PQ) key
    establishment.
 
@@ -232,7 +232,7 @@ Table of Contents
 
    This document requests/registers three new entries to the TLS Named
    Group (or Supported Group) registry, according to the procedures in
-   Section 6 of [tlsiana].
+   Section 6 of [RFC9847].
 
    Value:  0x0200
 
@@ -293,13 +293,11 @@ Table of Contents
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
-7.2.  Informative References
+   [RFC9847]  Salowey, J. and S. Turner, "IANA Registry Updates for TLS
+              and DTLS", RFC 9847, DOI 10.17487/RFC9847, December 2025,
+              <https://www.rfc-editor.org/rfc/rfc9847>.
 
-   [AVIRAM]   Nimrod Aviram, Benjamin Dowling, Ilan Komargodski, Kenny
-              Paterson, Eyal Ronen, and Eylon Yogev, "[TLS] Combining
-              Secrets in Hybrid Key Exchange in TLS 1.3", 1 September
-              2021, <https://mailarchive.ietf.org/arch/msg/tls/
-              F4SVeL2xbGPaPB2GW_GkBbD_a5M/>.
+7.2.  Informative References
 
    [BJ24]     Blanchet, B. and C. Jacomme, "Post-Quantum Sound
               CryptoVerif and Verification of Hybrid TLS and SSH Key-
@@ -317,15 +315,6 @@ Table of Contents
               Tamarin", Proceedings of ESORICS 2022 , 2022,
               <https://doi.org/10.1007/978-3-031-17143-7_4>.
 
-   [CNSAFAQ]  "The Commercial National Security Algorithm Suite 2.0 and
-              Quantum Computing FAQ", n.d.,
-              <https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/
-              CSI_CNSA_2.0_FAQ_.PDF>.
-
-   [CNSSP15]  "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING",
-              n.d., <https://www.cnss.gov/CNSS/
-              openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4>.
-
    [CPWB25]   Chen, J., Peng, W., Wang, Y., and Y. Bian, "On the
               Security and Efficiency of TLS 1.3 Handshake with Hybrid
               Key Exchange from CPA-Secure KEMs", Entropy 27(12):1242 ,
@@ -337,7 +326,7 @@ Table of Contents
 
    [DOWLING]  "A Cryptographic Analysis of the TLS 1.3 Handshake
               Protocol", Journal of Cryptology 2021 , 2020,
-              <DOI.10.1007/s00145-021-09384-1>.
+              <https://doi.org/10.1007/s00145-021-09384-1>.
 
    [ECDHE-MLKEM]
               Kwiatkowski, K., Kampanakis, P., Westerbaan, B., and D.
@@ -347,28 +336,10 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
               ecdhe-mlkem-05>.
 
-   [FO]       Fujisaki, E. and T. Okamoto, "Secure Integration of
-              Asymmetric and Symmetric Encryption Schemes", Springer
-              Science and Business Media LLC, Journal of Cryptology vol.
-              26, no. 1, pp. 80-101, DOI 10.1007/s00145-011-9114-1,
-              December 2011,
-              <https://doi.org/10.1007/s00145-011-9114-1>.
-
    [GHS25]    Glabush, L., Hovelmanns, K., and D. Stebila, "On The
               Multi-target Security of Post-Quantum Key Encapsulation
               Mechanisms", Cryptology ePrint Archive, Report 2025/343 ,
               2025, <https://eprint.iacr.org/2025/343.pdf>.
-
-   [HHK]      Hofheinz, D., Hövelmanns, K., and E. Kiltz, "A Modular
-              Analysis of the Fujisaki-Okamoto Transformation", Springer
-              International Publishing, Lecture Notes in Computer
-              Science pp. 341-371, DOI 10.1007/978-3-319-70500-2_12,
-              ISBN ["9783319704999", "9783319705002"], 2017,
-              <https://doi.org/10.1007/978-3-319-70500-2_12>.
-
-   [HPKE]     Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
-              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
-              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
    [HV22]     Huguenin-Dumittan, L. and S. Vaudenay, "On IND-qCCA
               Security in the ROM and Its Applications - CPA Security Is
@@ -382,13 +353,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
               hybrid-design-16>.
 
-   [ITSP.40.111]
-              "Cryptographic algorithms for UNCLASSIFIED, PROTECTED A,
-              and PROTECTED B information - ITSP.40.111", n.d.,
-              <https://www.cyber.gc.ca/en/guidance/cryptographic-
-              algorithms-unclassified-protected-protected-b-information-
-              itsp40111#a54>.
-
    [KEMTLS]   Schwabe, P., Stebila, D., and T. Wiggers, "Post-Quantum
               TLS Without Handshake Signatures", ACM, Proceedings of the
               2020 ACM SIGSAC Conference on Computer and Communications
@@ -400,15 +364,6 @@ Table of Contents
               ML-KEM Key Exchange in TLS 1.3", n.d.,
               <https://eprint.iacr.org/2026/1147.pdf>.
 
-   [KYBERV]   "Formally verifying Kyber Episode V: Machine-checked IND-
-              CCA security and correctness of ML-KEM in EasyCrypt",
-              n.d., <https://eprint.iacr.org/2024/843.pdf>.
-
-   [LUCKY13]  Al Fardan, N. J. and K. G. Paterson, "Lucky Thirteen:
-              Breaking the TLS and DTLS record protocols", n.d.,
-              <https://ieeexplore.ieee.org/
-              iel7/6547086/6547088/06547131.pdf>.
-
    [NIST-SP-800-227]
               Alagic, G., Barker, E., Chen, L., Moody, D., Robinson, A.,
               Silberg, H., and N. Waller, "Recommendations for key-
@@ -416,21 +371,10 @@ Table of Contents
               and Technology (U.S.), DOI 10.6028/nist.sp.800-227,
               September 2025, <https://doi.org/10.6028/nist.sp.800-227>.
 
-   [RACCOON]  Merget, R., Brinkmann, M., Aviram, N., Somorovsky, J.,
-              Mittmann, J., and J. Schwenk, "Raccoon Attack: Finding and
-              Exploiting Most-Significant-Bit-Oracles in TLS-DH(E)",
-              September 2020, <https://raccoon-attack.com/>.
-
    [RFC9794]  Driscoll, F., Parsons, M., and B. Hale, "Terminology for
               Post-Quantum Traditional Hybrid Schemes", RFC 9794,
               DOI 10.17487/RFC9794, June 2025,
               <https://www.rfc-editor.org/rfc/rfc9794>.
-
-   [tlsiana]  Salowey, J. A. and S. Turner, "IANA Registry Updates for
-              TLS and DTLS", Work in Progress, Internet-Draft, draft-
-              ietf-tls-rfc8447bis-15, 21 July 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              rfc8447bis-15>.
 
    [ZJZ24]    Zhou, B., Jiang, H., and Y. Zhao, "CPA-Secure KEMs are
               also Sufficient for Post-quantum TLS 1.3", Proceedings of
