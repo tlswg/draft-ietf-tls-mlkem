@@ -360,4 +360,4 @@ Supported Group) registry, according to the procedures in {{Section 6 of
 
 Thanks to Douglas Stebila for consultation on the
 draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla,
-John Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
+John Preuß Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
