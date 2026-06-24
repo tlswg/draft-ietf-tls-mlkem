@@ -295,7 +295,7 @@ including pen-and-paper computational proofs and machine-checked symbolic
 analysis using ProVerif {KOBEISSI26}, demonstrate that replacing
 Diffie-Hellman with an IND-CCA-secure KEM preserves the security properties
 of the TLS handshake. Formal analysis has also shown that hybrid key
-establishment (e.g., {{draft-ietf-tls-ecdhe-mklem}}) provides compositional
+establishment (e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional
 security; the exchange remains secure as long as at least one of the
 component algorithms is unbroken.
 
