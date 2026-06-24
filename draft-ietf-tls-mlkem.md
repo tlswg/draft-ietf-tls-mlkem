@@ -204,8 +204,8 @@ informative:
 --- abstract
 
 This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as `NamedGroup`s
-and and registers IANA values in the TLS Supported Groups registry for use
-in TLS 1.3 to achieve post-quantum (PQ) key establishment.
+and registers IANA values in the TLS Supported Groups registry for use in TLS
+1.3 to achieve post-quantum (PQ) key establishment.
 
 --- middle
 
