@@ -32,23 +32,6 @@ normative:
   FIPS203: DOI.10.6028/NIST.FIPS.203
 
 informative:
-  AVIRAM:
-    target: https://mailarchive.ietf.org/arch/msg/tls/F4SVeL2xbGPaPB2GW_GkBbD_a5M/
-    title: "[TLS] Combining Secrets in Hybrid Key Exchange in TLS 1.3"
-    date: 2021-09-01
-    author:
-      -
-        ins: Nimrod Aviram
-      -
-        ins: Benjamin Dowling
-      -
-        ins: Ilan Komargodski
-      -
-        ins: Kenny Paterson
-      -
-        ins: Eyal Ronen
-      -
-        ins: Eylon Yogev
   BJ24:
     target: https://bblanche.gitlabpages.inria.fr/publications/BlanchetJacommeCSF24.pdf
     title: "Post-Quantum Sound CryptoVerif and Verification of Hybrid TLS and SSH Key-Exchanges"
@@ -92,12 +75,6 @@ informative:
       ins: D. Stebila
     -
       ins: T. Wiggers
-  CNSAFAQ:
-    target: https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF
-    title: "The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ"
-  CNSSP15:
-    target: https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
-    title: "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"
   CPWB25:
     target: https://doi.org/10.3390/e27121242
     title: "On the Security and Efficiency of TLS 1.3 Handshake with Hybrid Key Exchange from CPA-Secure KEMs"
@@ -125,7 +102,6 @@ informative:
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
-  FO: DOI.10.1007/s00145-011-9114-1
   GHS25:
     target: https://eprint.iacr.org/2025/343.pdf
     title: "On The Multi-target Security of Post-Quantum Key Encapsulation Mechanisms"
@@ -138,7 +114,6 @@ informative:
       name: Kathrin Hovelmanns
     -
       name: Douglas Stebila
-  HHK: DOI.10.1007/978-3-319-70500-2_12
   HV22:
     target: https://link.springer.com/chapter/10.1007/978-3-031-07082-2_22
     title: "On IND-qCCA Security in the ROM and Its Applications - CPA Security Is Sufficient for TLS 1.3"
@@ -148,44 +123,12 @@ informative:
       name: Loïs Huguenin-Dumittan
     -
       name: Serge Vaudenay
-  HPKE: RFC9180
   HYBRID: I-D.ietf-tls-hybrid-design
-  ITSP.40.111:
-    target: "https://www.cyber.gc.ca/en/guidance/cryptographic-algorithms-unclassified-protected-protected-b-information-itsp40111#a54"
-    title: "Cryptographic algorithms for UNCLASSIFIED, PROTECTED A, and PROTECTED B information - ITSP.40.111"
   KOBEISSI26:
     target: "https://eprint.iacr.org/2026/1147.pdf"
     title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
   KEMTLS: DOI.10.1145/3372297.3423350
-  KYBERV:
-    target: https://eprint.iacr.org/2024/843.pdf
-    title: "Formally verifying Kyber Episode V: Machine-checked IND-CCA security and correctness of ML-KEM in EasyCrypt"
-  LUCKY13:
-    target: https://ieeexplore.ieee.org/iel7/6547086/6547088/06547131.pdf
-    title: "Lucky Thirteen: Breaking the TLS and DTLS record protocols"
-    author:
-    -
-      ins: N. J. Al Fardan
-    -
-      ins: K. G. Paterson
   NIST-SP-800-227: DOI.10.6028/NIST.SP.800-227
-  RACCOON:
-    target: https://raccoon-attack.com/
-    title: "Raccoon Attack: Finding and Exploiting Most-Significant-Bit-Oracles in TLS-DH(E)"
-    author:
-    -
-      ins: R. Merget
-    -
-      ins: M. Brinkmann
-    -
-      ins: N. Aviram
-    -
-      ins: J. Somorovsky
-    -
-      ins: J. Mittmann
-    -
-      ins: J. Schwenk
-    date: 2020-09
   RFC9794:
   tlsiana: I-D.ietf-tls-rfc8447bis
   ZJZ24:
