@@ -49,6 +49,18 @@ informative:
         ins: Eyal Ronen
       -
         ins: Eylon Yogev
+  BJ24:
+    target: https://bblanche.gitlabpages.inria.fr/publications/BlanchetJacommeCSF24.pdf
+    title: "Post-Quantum Sound CryptoVerif and Verification of Hybrid TLS and SSH Key-Exchanges"
+    date: 2024
+    seriesinfo: "Proceedings of CSF 2024"
+    author:
+    -
+      ins: B. Blanchet
+      name: Bruno Blanchet
+    -
+      ins: C. Jacomme
+      name: Charlie Jacomme
   CDM23:
     title: "Keeping Up with the KEMs: Stronger Security Notions for KEMs and automated analysis of KEM-based protocols"
     target: https://eprint.iacr.org/2023/1933.pdf
@@ -86,6 +98,24 @@ informative:
   CNSSP15:
     target: https://www.cnss.gov/CNSS/openDoc.cfm?a=kryrfZb9nS00l4L2shjYcQ%3D%3D&b=C944BD2E7ABAA37851D7A7EF71743C3ACE8393115D7588CD4423DD2B918812A86F060A05C2E0D4DEF8456CC75B2D39F4
     title: "USE OF PUBLIC STANDARDS FOR SECURE INFORMATION SHARING"
+  CPWB25:
+    target: https://doi.org/10.3390/e27121242
+    title: "On the Security and Efficiency of TLS 1.3 Handshake with Hybrid Key Exchange from CPA-Secure KEMs"
+    date: 2025
+    seriesinfo: "Entropy 27(12):1242"
+    author:
+    -
+      ins: J. Chen
+      name: Jinrong Chen
+    -
+      ins: W. Peng
+      name: Wei Peng
+    -
+      ins: Y. Wang
+      name: Yi Wang
+    -
+      ins: Y. Bian
+      name: Yutong Bian
   CZCJWH25:
     target: https://eprint.iacr.org/2025/1748.pdf
     title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
@@ -296,8 +326,8 @@ analysis using ProVerif {{KOBEISSI26}}, demonstrate that replacing
 Diffie-Hellman with an IND-CCA-secure KEM preserves the security properties
 of the TLS handshake. Formal analysis has also shown that hybrid key
 establishment (e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional
-security; the exchange remains secure as long as at least one of the
-component algorithms is unbroken.
+security: the exchange remains secure as long as at least one of the
+component algorithms is unbroken {{BJ24}} {{CPWB25}}.
 
 TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field of the `key_share` extension is
