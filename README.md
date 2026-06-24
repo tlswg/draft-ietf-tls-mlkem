@@ -1,11 +1,11 @@
 # ML-KEM Post-Quantum Key Agreement for TLS 1.3
 
-This is the working area for the individual Internet-Draft, "ML-KEM Post-Quantum Key Agreement for TLS 1.3".
+This is the working area for the TLS WG Internet-Draft, "ML-KEM Post-Quantum Key Agreement for TLS 1.3".
 
-* [Editor's Copy](https://tlswg.github.io/draft-ietf-tls-mlkem/#go.draft-ietf-tls-mlkem.html)
+* [Editor's Copy](https://tlswg.github.io/draft-ietf-tls-mlkem/draft-ietf-tls-mlkem.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-tls-mlkem)
-* [Compare Editor's Copy to Individual Draft](https://tlswg.github.io/draft-ietf-tls-mlkem/#go.draft-ietf-tls-mlkem.diff)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-tls-mlkem)
+* [Compare Editor's Copy to Working Group Draft](https://author-tools.ietf.org/api/iddiff?doc_1=draft-ietf-tls-mlkem&url_2=https://tlswg.github.io/draft-ietf-tls-mlkem/draft-ietf-tls-mlkem.txt)
 
 
 ## Contributing
