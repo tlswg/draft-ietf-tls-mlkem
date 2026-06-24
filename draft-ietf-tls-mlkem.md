@@ -224,7 +224,7 @@ ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
 # Construction {#construction}
 
 The KEMs are defined as `NamedGroup`s, sent in the `supported_groups`
-extension. {{Section 4.2.7 of !RFC8446}}
+extension. {{Section 4.2.7 of !RFC8446bis}}
 
 ## Negotiation {#negotiation}
 
@@ -253,7 +253,7 @@ directly encoded with fixed lengths as in {{FIPS203}}.
 
 In TLS 1.3 a KEM public encapsulation key `pk` or ciphertext `ct` is
 represented as a `KeyShareEntry` as specified in {{Section 4.2.8 of
-!RFC8446}}. These are transmitted in the `extension_data` fields of
+!RFC8446bis}}. These are transmitted in the `extension_data` fields of
 `KeyShareClientHello` and `KeyShareServerHello` extensions.
 
 For the client's share, the `key_exchange` value contains the `pk`
@@ -282,7 +282,7 @@ The fixed-length shared secret output from the ML-KEM `Encaps` and `Decaps`
 algorithms over the appropriate keypair and ciphertext results in the same
 shared secret `shared_secret` as its peer, which is inserted into the TLS 1.3
 key schedule in place of the (EC)DHE shared secret, as shown in {{Section 7.1
-of !RFC8446}}.
+of !RFC8446bis}}.
 
 # Security Considerations {#security-considerations}
 
@@ -292,7 +292,7 @@ and security models {{DOWLING}} {{KEMTLS}} {{HV22}} {{CHSW22}} {{CZCJWH25}}
 {{ZJZ24}}; ML-KEM's IND-CCA security exceeds the requirements for ephemeral
 key establishment {{GHS25}} {{RFC8446bis}}. Multiple formal analyses,
 including pen-and-paper computational proofs and machine-checked symbolic
-analysis using ProVerif {KOBEISSI26}, demonstrate that replacing
+analysis using ProVerif {{KOBEISSI26}}, demonstrate that replacing
 Diffie-Hellman with an IND-CCA-secure KEM preserves the security properties
 of the TLS handshake. Formal analysis has also shown that hybrid key
 establishment (e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional
