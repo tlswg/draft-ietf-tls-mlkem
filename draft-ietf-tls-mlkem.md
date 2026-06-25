@@ -331,7 +331,7 @@ Supported Group) registry, according to the procedures in {{Section 6 of
 
  Comment:
  : FIPS 203 version of ML-KEM-512
-
+{:compact}
 
 
  Value:
@@ -351,7 +351,7 @@ Supported Group) registry, according to the procedures in {{Section 6 of
 
  Comment:
  : FIPS 203 version of ML-KEM-768
-
+{:compact}
 
 
  Value:
@@ -371,6 +371,7 @@ Supported Group) registry, according to the procedures in {{Section 6 of
 
  Comment:
  : FIPS 203 version of ML-KEM-1024
+{:compact}
 
 
 As defined in {{Section 3 of RFC9847}}, the value N indicates:
