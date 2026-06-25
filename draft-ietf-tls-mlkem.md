@@ -234,7 +234,7 @@ output of the corresponding ML-KEM parameter set's `KeyGen` algorithm.
 For the server's share, the `key_exchange` value contains the `ct`
 output of the corresponding ML-KEM parameter set's `Encaps` algorithm.
 
-For all parameter sets, the server MUST check if the encapsulation key (`pk`)
+For all parameter sets, the server MUST check if the encapsulation key length (`pk`)
 matches the selected parameter set,
 and abort with an `illegal_parameter` alert if it fails.
 
