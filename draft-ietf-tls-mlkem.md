@@ -238,9 +238,9 @@ For all parameter sets, the server MUST perform the encapsulation key check
 described in Section 7.2 of {{FIPS203}} on the client's encapsulation key,
 and abort with an `illegal_parameter` alert if it fails.
 
-For all parameter sets, the client MUST check if the ciphertext length
-matches the selected parameter set, and abort with an `illegal_parameter`
-alert if it fails.
+For all parameter sets, the client MUST perform the decapsulation input check
+described in Section 7.3 of {{FIPS203}} on the ciphertext, and abort with
+an `illegal_parameter` alert if it fails.
 
 If ML-KEM decapsulation fails for any other reason, the connection MUST be
 aborted with an `internal_error` alert.
