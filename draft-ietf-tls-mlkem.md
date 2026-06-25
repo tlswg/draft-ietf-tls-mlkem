@@ -242,8 +242,8 @@ For all parameter sets, the client MUST perform the decapsulation input check
 described in Section 7.3 of {{FIPS203}} on the ciphertext, and abort with
 an `illegal_parameter` alert if it fails.
 
-If ML-KEM decapsulation fails for any other reason, the connection MUST be
-aborted with an `internal_error` alert.
+If ML-KEM encapsulation or decapsulation fails for any other reason,
+the connection MUST be aborted with an `internal_error` alert.
 
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
 ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be reused.
