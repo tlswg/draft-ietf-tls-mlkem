@@ -242,11 +242,6 @@ For all parameter sets, the client MUST check if the ciphertext length (`ct`)
 matches the selected parameter set,
 and abort with an `illegal_parameter` alert if it fails.
 
-Prior to encapsulation, the server MUST perform the encapsulation key check
-from Section 7.2 of {{FIPS203}}.
-Prior to decapsulation, the client MUST perform the decapsulation input check
-from Section 7.3 of {{FIPS203}}.
-
 If ML-KEM checks, encapsulation, or decapsulation fail for any other reason,
 the connection MUST be aborted with an `internal_error` alert.
 
