@@ -102,6 +102,10 @@ informative:
     title: "A Cryptographic Analysis of the TLS 1.3 Handshake Protocol"
     date: 2020
     seriesinfo: "Journal of Cryptology 2021"
+  DUALECTLS:
+    title: "On the Practical Exploitability of Dual EC in TLS Implementations"
+    target: https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-checkoway.pdf
+    date: 2014
   ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
   GHS25:
     target: https://eprint.iacr.org/2025/343.pdf
@@ -130,6 +134,7 @@ informative:
     title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
   KEMTLS: DOI.10.1145/3372297.3423350
   NIST-SP-800-227: DOI.10.6028/NIST.SP.800-227
+  RFC8937:
   RFC9794:
   RFC9847:
   ZJZ24:
@@ -175,9 +180,9 @@ This document models key establishment as key encapsulation mechanisms
 - `Encaps(pk) -> (ct, shared_secret)`: A probabilistic encapsulation
   algorithm, which takes as input a public encapsulation key `pk` and
   outputs a ciphertext `ct` and shared secret `shared_secret`.
-- `Decaps(sk, ct) -> shared_secret`: A decapsulation algorithm, which takes as
-  input a secret decapsulation key `sk` and ciphertext `ct` and outputs
-  a shared secret `shared_secret`.
+- `Decaps(sk, ct) -> shared_secret`: A decapsulation algorithm, which takes
+  as input a secret decapsulation key `sk` and ciphertext `ct` and outputs a
+  shared secret `shared_secret`.
 
 
 ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
@@ -293,6 +298,14 @@ operational constraints when deciding whether to deploy standalone ML-KEM or
 a hybrid construction. The recommended column in the IANA TLS Supported
 Groups registry contains the IETF's current guidance on the recommended use
 of these algorithms for general purposes.
+
+The disclosure of raw random number generator (RNG) output in TLS and other
+protocols can be used in an attack to compromise the state of an insecure RNG
+as described in [DUALECTLS]. The encapsulation randomness in ML-KEM is an
+additional place where raw RNG output may be disclosed, therefore it is
+important to follow the RNG guidance in [FIPS203] and [RFC9846]. Implementers
+can choose to implement mechanisms from [RFC8937] for additional protection
+across sessions.
 
 # IANA Considerations
 
