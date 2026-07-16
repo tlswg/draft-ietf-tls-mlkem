@@ -249,6 +249,11 @@ aborted with an `internal_error` alert.
 Implementations MUST NOT reuse randomness in the generation of ML-KEM
 ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be reused.
 
+During encapsulation, ML-KEM draws the encapsulation randomness from a random
+bit generator; the peer holding the decapsulation key `sk` recovers this
+randomness exactly. Any information that this randomness provides about other
+outputs of the generator is therefore available to that peer.
+
 ## Shared secret calculation {#construction-shared-secret}
 
 The fixed-length shared secret output from the ML-KEM `Encaps` and `Decaps`
