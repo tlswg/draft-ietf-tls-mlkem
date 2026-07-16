@@ -131,6 +131,7 @@ informative:
   KEMTLS: DOI.10.1145/3372297.3423350
   NIST-SP-800-227: DOI.10.6028/NIST.SP.800-227
   RFC9794:
+  RFC9847:
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
     title: "CPA-Secure KEMs are also Sufficient for Post-quantum TLS 1.3"
@@ -353,6 +354,15 @@ Supported Group) registry, according to the procedures in {{Section 6 of
  Comment:
  : FIPS 203 version of ML-KEM-1024
 
+
+As defined in {{Section 3 of RFC9847}}, the value N indicates:
+
+> ... that the item has not been evaluated by the IETF and that the IETF has
+> made no statement about the suitability of the associated mechanism. This
+> does not necessarily mean that the mechanism is flawed, only that no
+> consensus exists. The IETF might have consensus to leave an item marked as
+> "N" on the basis of the item having limited applicability or usage
+> constraints.
 
 --- back
 
