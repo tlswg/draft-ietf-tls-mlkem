@@ -299,13 +299,13 @@ a hybrid construction. The recommended column in the IANA TLS Supported
 Groups registry contains the IETF's current guidance on the recommended use
 of these algorithms for general purposes.
 
-The disclosure of raw random number generator (RNG) output in TLS and other
-protocols can be used in an attack to compromise the state of an insecure RNG
-as described in [DUALECTLS]. The encapsulation randomness in ML-KEM is an
-additional place where raw RNG output may be disclosed, therefore it is
-important to follow the RNG guidance in [FIPS203] and [RFC9846]. Implementers
-can choose to implement mechanisms from [RFC8937] for additional protection
-across sessions.
+The disclosure of the output(s) of an insecure random number generator (RNG)
+when used in TLS and other protocols can be used in an attack to compromise
+the state of the insecure RNG itself as described in [DUALEC-TLS]. The
+encapsulation randomness in ML-KEM is an additional place where raw RNG
+output may be disclosed, therefore it is important to follow the RNG guidance
+in [FIPS203] and [RFC9846]. Implementers can choose to implement mechanisms
+from [RFC8937] for additional protection across sessions.
 
 # IANA Considerations
 
@@ -375,12 +375,11 @@ Supported Group) registry, according to the procedures in {{Section 6 of
 
 As defined in {{Section 3 of RFC9847}}, the value N indicates:
 
-> ... that the item has not been evaluated by the IETF and that the IETF has
-> made no statement about the suitability of the associated mechanism. This
-> does not necessarily mean that the mechanism is flawed, only that no
-> consensus exists. The IETF might have consensus to leave an item marked as
-> "N" on the basis of the item having limited applicability or usage
-> constraints.
+> that the item has not been evaluated by the IETF and that the IETF has made
+> no statement about the suitability of the associated mechanism. This does
+> not necessarily mean that the mechanism is flawed, only that no consensus
+> exists. The IETF might have consensus to leave an item marked as "N" on the
+> basis of the item having limited applicability or usage constraints.
 
 --- back
 
