@@ -321,7 +321,7 @@ RFC9847}}.
 
 As defined in {{Section 3 of RFC9847}}, the value N indicates:
 
-> that the item has not been evaluated by the IETF and that the IETF has made
+> That the item has not been evaluated by the IETF and that the IETF has made
 > no statement about the suitability of the associated mechanism. This does
 > not necessarily mean that the mechanism is flawed, only that no consensus
 > exists. The IETF might have consensus to leave an item marked as "N" on the
