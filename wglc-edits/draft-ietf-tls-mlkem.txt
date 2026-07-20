@@ -1,0 +1,410 @@
+
+
+
+
+Transport Layer Security                                     D. Connolly
+Internet-Draft                                                 SandboxAQ
+Intended status: Informational                              20 July 2026
+Expires: 21 January 2027
+
+
+             ML-KEM Post-Quantum Key Agreement for TLS 1.3
+                      draft-ietf-tls-mlkem-latest
+
+Abstract
+
+   This memo defines ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as
+   NamedGroups and registers IANA values in the TLS Supported Groups
+   registry for use in TLS 1.3 to achieve post-quantum (PQ) key
+   establishment.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/.
+
+   Discussion of this document takes place on the Transport Layer
+   Security Working Group mailing list (mailto:tls@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/tls/.  Subscribe
+   at https://www.ietf.org/mailman/listinfo/tls/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/tlswg/draft-ietf-tls-mlkem.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 21 January 2027.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Key encapsulation mechanisms
+   4.  Construction
+     4.1.  Negotiation
+     4.2.  Transmitting encapsulation keys and ciphertexts
+     4.3.  Shared secret calculation
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Acknowledgments
+   Author's Address
+
+1.  Introduction
+
+   ML-KEM [FIPS203] is a FIPS standard for post-quantum [RFC9794] key
+   establishment via a lattice-based key encapsulation mechanism (KEM).
+   This document defines key establishment options for TLS 1.3 via the
+   existing supported_groups Section 4.3.7 of [RFC9846] and key_share
+   Section 4.3.8 of [RFC9846] extensions.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Key encapsulation mechanisms
+
+   This document models key establishment as key encapsulation
+   mechanisms (KEMs), which consist of three algorithms:
+
+   *  KeyGen() -> (pk, sk): A probabilistic key generation algorithm,
+      which generates a public encapsulation key pk and a secret
+      decapsulation key sk.
+
+   *  Encaps(pk) -> (ct, shared_secret): A probabilistic encapsulation
+      algorithm, which takes as input a public encapsulation key pk and
+      outputs a ciphertext ct and shared secret shared_secret.
+
+   *  Decaps(sk, ct) -> shared_secret: A decapsulation algorithm, which
+      takes as input a secret decapsulation key sk and ciphertext ct and
+      outputs a shared secret shared_secret.
+
+   ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
+
+   *  ML-KEM-512 has encapsulation keys of size 800 bytes, expanded
+      decapsulation keys of 1632 bytes, decapsulation key seeds of size
+      64 bytes, ciphertext size of 768 bytes, and shared secrets of size
+      32 bytes
+
+   *  ML-KEM-768 has encapsulation keys of size 1184 bytes, expanded
+      decapsulation keys of 2400 bytes, decapsulation key seeds of size
+      64 bytes, ciphertext size of 1088 bytes, and shared secrets of
+      size 32 bytes
+
+   *  ML-KEM-1024 has encapsulation keys of size 1568 bytes, expanded
+      decapsulation keys of 3168 bytes, decapsulation key seeds of size
+      64 bytes, ciphertext size of 1568 bytes, and shared secrets of
+      size 32 bytes
+
+4.  Construction
+
+   The KEMs are defined as NamedGroups, sent in the supported_groups
+   extension.  Section 4.3.7 of [RFC9846]
+
+4.1.  Negotiation
+
+   Each parameter set of ML-KEM is assigned an identifier, registered by
+   IANA in the TLS Supported Groups registry:
+
+       enum {
+
+            ...,
+
+             /* ML-KEM Key Establishment Methods */
+             mlkem512(0x0200),
+             mlkem768(0x0201),
+             mlkem1024(0x0202)
+
+            ...,
+
+       } NamedGroup;
+
+4.2.  Transmitting encapsulation keys and ciphertexts
+
+   The public encapsulation key and ciphertext values are each directly
+   encoded with fixed lengths as in [FIPS203].
+
+   In TLS 1.3 a KEM public encapsulation key pk or ciphertext ct is
+   represented as a KeyShareEntry as specified in Section 4.3.8 of
+   [RFC9846].  These are transmitted in the extension_data fields of
+   KeyShareClientHello and KeyShareServerHello extensions.
+
+   For the client's share, the key_exchange value contains the pk output
+   of the corresponding ML-KEM parameter set's KeyGen algorithm.
+
+   For the server's share, the key_exchange value contains the ct output
+   of the corresponding ML-KEM parameter set's Encaps algorithm.
+
+   For all parameter sets, the server MUST perform the encapsulation key
+   check described in Section 7.2 of [FIPS203] on the client's
+   encapsulation key, and abort with an illegal_parameter alert if it
+   fails.
+
+   For all parameter sets, the client MUST check if the ciphertext
+   length matches the selected parameter set, and abort with an
+   illegal_parameter alert if it fails.
+
+   If ML-KEM decapsulation fails for any other reason, the connection
+   MUST be aborted with an internal_error alert.
+
+   Implementations MUST NOT reuse randomness in the generation of ML-KEM
+   ciphertexts— it follows that ML-KEM ciphertexts also MUST NOT be
+   reused.
+
+   During encapsulation, ML-KEM draws the encapsulation randomness from
+   a random bit generator; the peer holding the decapsulation key sk
+   recovers this randomness exactly.  Any information that this
+   randomness provides about other outputs of the generator is therefore
+   available to that peer.
+
+4.3.  Shared secret calculation
+
+   The fixed-length shared secret output from the ML-KEM Encaps and
+   Decaps algorithms over the appropriate keypair and ciphertext results
+   in the same shared secret shared_secret as its peer, which is
+   inserted into the TLS 1.3 key schedule in place of the (EC)DHE shared
+   secret, as shown in Section 7.1 of [RFC9846].
+
+5.  Security Considerations
+
+   This document defines standalone ML-KEM key establishment for TLS
+   1.3.  Use of KEMs for key agreement in TLS 1.3 has been analyzed in
+   multiple settings and security models [DOWLING] [KEMTLS] [HV22]
+   [CHSW22] [CZCJWH25] [ZJZ24]; ML-KEM's IND-CCA security exceeds the
+   requirements for ephemeral key establishment [GHS25] [RFC9846].
+   Multiple formal analyses, including pen-and-paper computational
+   proofs and machine-checked symbolic analysis using ProVerif
+   [KOBEISSI26], demonstrate that replacing Diffie-Hellman with an IND-
+   CCA-secure KEM preserves the security properties of the TLS
+   handshake.  Formal analysis has also shown that hybrid key
+   establishment (e.g., [HYBRID], [ECDHE-MLKEM]) provides compositional
+   security: the exchange remains secure as long as at least one of the
+   component algorithms is unbroken [BJ24] [CPWB25].
+
+   TLS 1.3's key schedule commits to the ML-KEM encapsulation key and
+   the ciphertext as the key_exchange field of the key_share extension
+   is populated with those values, which are included as part of the
+   handshake messages.  This provides resilience against re-
+   encapsulation attacks against KEMs used for key establishment
+   [CDM23].
+
+   [NIST-SP-800-227] includes guidelines and requirements for
+   implementations on using KEMs securely.  Implementers are encouraged
+   to use implementations resistant to side-channel attacks, especially
+   those that can be applied by remote attackers.
+
+   Implementers must evaluate their specific security, performance, and
+   operational constraints when deciding whether to deploy standalone
+   ML-KEM or a hybrid construction.  The recommended column in the IANA
+   TLS Supported Groups registry contains the IETF's current guidance on
+   the recommended use of these algorithms for general purposes.
+
+   The disclosure of the output(s) of an insecure random number
+   generator (RNG) when used in TLS and other protocols can be used in
+   an attack to compromise the state of the insecure RNG itself as
+   described in [DUALEC-TLS].  The encapsulation randomness in ML-KEM is
+   an additional place where raw RNG output may be disclosed, therefore
+   it is important to follow the RNG guidance in [FIPS203] and
+   [RFC9846].  Implementers can choose to implement mechanisms from
+   [RFC8937] for additional protection across sessions.
+
+6.  IANA Considerations
+
+   This document requests/registers three new entries to the TLS Named
+   Group (or Supported Group) registry, according to the procedures in
+   Section 6 of [RFC9847].
+
+   +======+=============+=======+=============+=========+=============+
+   |Value | Description |DTLS-OK| Recommended |Reference| Comment     |
+   +======+=============+=======+=============+=========+=============+
+   |0x0200| MLKEM512    |Y      | N           |This     | FIPS 203    |
+   |      |             |       |             |document.| version of  |
+   |      |             |       |             |         | ML-KEM-512  |
+   +------+-------------+-------+-------------+---------+-------------+
+   |0x0201| MLKEM768    |Y      | N           |This     | FIPS 203    |
+   |      |             |       |             |document.| version of  |
+   |      |             |       |             |         | ML-KEM-768  |
+   +------+-------------+-------+-------------+---------+-------------+
+   |0x0202| MLKEM1024   |Y      | N           |This     | FIPS 203    |
+   |      |             |       |             |document.| version of  |
+   |      |             |       |             |         | ML-KEM-1024 |
+   +------+-------------+-------+-------------+---------+-------------+
+
+                                 Table 1
+
+   As defined in Section 3 of [RFC9847], the value N indicates:
+
+      that the item has not been evaluated by the IETF and that the IETF
+      has made no statement about the suitability of the associated
+      mechanism.  This does not necessarily mean that the mechanism is
+      flawed, only that no consensus exists.  The IETF might have
+      consensus to leave an item marked as "N" on the basis of the item
+      having limited applicability or usage constraints.
+
+7.  References
+
+7.1.  Normative References
+
+   [FIPS203]  "Module-lattice-based key-encapsulation mechanism
+              standard", National Institute of Standards and Technology
+              (U.S.), DOI 10.6028/nist.fips.203, August 2024,
+              <https://doi.org/10.6028/nist.fips.203>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9846]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 9846, DOI 10.17487/RFC9846, July 2026,
+              <https://www.rfc-editor.org/rfc/rfc9846>.
+
+7.2.  Informative References
+
+   [BJ24]     Blanchet, B. and C. Jacomme, "Post-Quantum Sound
+              CryptoVerif and Verification of Hybrid TLS and SSH Key-
+              Exchanges", Proceedings of CSF 2024 , 2024,
+              <https://bblanche.gitlabpages.inria.fr/publications/
+              BlanchetJacommeCSF24.pdf>.
+
+   [CDM23]    Cremers, C., Dax, A., and N. Medinger, "Keeping Up with
+              the KEMs: Stronger Security Notions for KEMs and automated
+              analysis of KEM-based protocols", 2023,
+              <https://eprint.iacr.org/2023/1933.pdf>.
+
+   [CHSW22]   Celi, S., Hoyland, J., Stebila, D., and T. Wiggers, "A
+              Tale of Two Models: Formal Verification of KEMTLS via
+              Tamarin", Proceedings of ESORICS 2022 , 2022,
+              <https://doi.org/10.1007/978-3-031-17143-7_4>.
+
+   [CPWB25]   Chen, J., Peng, W., Wang, Y., and Y. Bian, "On the
+              Security and Efficiency of TLS 1.3 Handshake with Hybrid
+              Key Exchange from CPA-Secure KEMs", Entropy 27(12):1242 ,
+              2025, <https://doi.org/10.3390/e27121242>.
+
+   [CZCJWH25] "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs}
+              with Tighter Reductions", n.d.,
+              <https://eprint.iacr.org/2025/1748.pdf>.
+
+   [DOWLING]  "A Cryptographic Analysis of the TLS 1.3 Handshake
+              Protocol", Journal of Cryptology 2021 , 2020,
+              <https://doi.org/10.1007/s00145-021-09384-1>.
+
+   [DUALECTLS]
+              "On the Practical Exploitability of Dual EC in TLS
+              Implementations", 2014,
+              <https://www.usenix.org/system/files/conference/
+              usenixsecurity14/sec14-paper-checkoway.pdf>.
+
+   [ECDHE-MLKEM]
+              Kwiatkowski, K., Kampanakis, P., Westerbaan, B., and D.
+              Stebila, "Post-quantum hybrid ECDHE-MLKEM Key Agreement
+              for TLSv1.3", Work in Progress, Internet-Draft, draft-
+              ietf-tls-ecdhe-mlkem-05, 26 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
+              ecdhe-mlkem-05>.
+
+   [GHS25]    Glabush, L., Hovelmanns, K., and D. Stebila, "On The
+              Multi-target Security of Post-Quantum Key Encapsulation
+              Mechanisms", Cryptology ePrint Archive, Report 2025/343 ,
+              2025, <https://eprint.iacr.org/2025/343.pdf>.
+
+   [HV22]     Huguenin-Dumittan, L. and S. Vaudenay, "On IND-qCCA
+              Security in the ROM and Its Applications - CPA Security Is
+              Sufficient for TLS 1.3", Proceedings of Eurocrypt 2022 ,
+              n.d., <https://link.springer.com/
+              chapter/10.1007/978-3-031-07082-2_22>.
+
+   [HYBRID]   Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
+              exchange in TLS 1.3", Work in Progress, Internet-Draft,
+              draft-ietf-tls-hybrid-design-16, 7 September 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
+              hybrid-design-16>.
+
+   [KEMTLS]   Schwabe, P., Stebila, D., and T. Wiggers, "Post-Quantum
+              TLS Without Handshake Signatures", ACM, Proceedings of the
+              2020 ACM SIGSAC Conference on Computer and Communications
+              Security pp. 1461-1480, DOI 10.1145/3372297.3423350,
+              October 2020, <https://doi.org/10.1145/3372297.3423350>.
+
+   [KOBEISSI26]
+              "FATT Chance: On the Robustness of Standalone and Hybrid
+              ML-KEM Key Exchange in TLS 1.3", n.d.,
+              <https://eprint.iacr.org/2026/1147.pdf>.
+
+   [NIST-SP-800-227]
+              Alagic, G., Barker, E., Chen, L., Moody, D., Robinson, A.,
+              Silberg, H., and N. Waller, "Recommendations for key-
+              encapsulation mechanisms", National Institute of Standards
+              and Technology (U.S.), DOI 10.6028/nist.sp.800-227,
+              September 2025, <https://doi.org/10.6028/nist.sp.800-227>.
+
+   [RFC8937]  Cremers, C., Garratt, L., Smyshlyaev, S., Sullivan, N.,
+              and C. Wood, "Randomness Improvements for Security
+              Protocols", RFC 8937, DOI 10.17487/RFC8937, October 2020,
+              <https://www.rfc-editor.org/rfc/rfc8937>.
+
+   [RFC9794]  Driscoll, F., Parsons, M., and B. Hale, "Terminology for
+              Post-Quantum Traditional Hybrid Schemes", RFC 9794,
+              DOI 10.17487/RFC9794, June 2025,
+              <https://www.rfc-editor.org/rfc/rfc9794>.
+
+   [RFC9847]  Salowey, J. and S. Turner, "IANA Registry Updates for TLS
+              and DTLS", RFC 9847, DOI 10.17487/RFC9847, December 2025,
+              <https://www.rfc-editor.org/rfc/rfc9847>.
+
+   [ZJZ24]    Zhou, B., Jiang, H., and Y. Zhao, "CPA-Secure KEMs are
+              also Sufficient for Post-quantum TLS 1.3", Proceedings of
+              Asiacrypt 2024 , n.d.,
+              <https://doi.org/10.1007/978-981-96-0891-1_14>.
+
+Acknowledgments
+
+   Thanks to Douglas Stebila for consultation on the draft-ietf-tls-
+   hybrid-design design, and to Scott Fluhrer, Eric Rescorla, John Preuß
+   Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
+
+Author's Address
+
+   Deirdre Connolly
+   SandboxAQ
+   Email: durumcrustulum@gmail.com
