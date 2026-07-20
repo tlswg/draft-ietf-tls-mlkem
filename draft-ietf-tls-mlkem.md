@@ -311,7 +311,7 @@ from [RFC8937] for additional protection across sessions.
 
 This document requests/registers three new entries to the TLS Named Group (or
 Supported Group) registry, according to the procedures in {{Section 6 of
-!RFC9847}}.
+RFC9847}}.
 
 | Value   | Description | DTLS-OK | Recommended | Reference      | Comment                         |
 |---------|-------------|---------|-------------|----------------|---------------------------------|
