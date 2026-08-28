@@ -162,8 +162,8 @@ and registers IANA values in the TLS Supported Groups registry for use in TLS
 ML-KEM {{FIPS203}} is a FIPS standard for post-quantum {{RFC9794}} key
 establishment via a lattice-based key encapsulation mechanism (KEM). This
 document defines key establishment options for TLS 1.3 via the existing
-`supported_groups` {{Section 4.3.7 of RFC9846}} and `key_share` {{Section
-4.3.8 of RFC9846}} extensions.
+`supported_groups` ({{Section 4.3.7 of RFC9846}}) and `key_share` ({{Section
+4.3.8 of RFC9846}}) extensions.
 
 # Conventions and Definitions
 
@@ -185,24 +185,24 @@ This document models key establishment as key encapsulation mechanisms
   shared secret `shared_secret`.
 
 
-ML-KEM-512, ML-KEM-768 and ML-KEM-1024 conform to this interface:
+ML-KEM-512, ML-KEM-768, and ML-KEM-1024 conform to this interface (Table 3 of {{FIPS203}}):
 
 - ML-KEM-512 has encapsulation keys of size 800 bytes, expanded decapsulation
   keys of 1632 bytes, decapsulation key seeds of size 64 bytes, ciphertext
-  size of 768 bytes, and shared secrets of size 32 bytes
+  size of 768 bytes, and shared secrets of size 32 bytes.
 
 - ML-KEM-768 has encapsulation keys of size 1184 bytes, expanded
   decapsulation keys of 2400 bytes, decapsulation key seeds of size 64 bytes,
-  ciphertext size of 1088 bytes, and shared secrets of size 32 bytes
+  ciphertext size of 1088 bytes, and shared secrets of size 32 bytes.
 
 - ML-KEM-1024 has encapsulation keys of size 1568 bytes, expanded
   decapsulation keys of 3168 bytes, decapsulation key seeds of size 64 bytes,
-  ciphertext size of 1568 bytes, and shared secrets of size 32 bytes
+  ciphertext size of 1568 bytes, and shared secrets of size 32 bytes.
 
 # Construction {#construction}
 
 The KEMs are defined as `NamedGroup`s, sent in the `supported_groups`
-extension. {{Section 4.3.7 of RFC9846}}
+extension ({{Section 4.3.7 of RFC9846}}).
 
 ## Negotiation {#negotiation}
 
@@ -315,13 +315,14 @@ RFC9847}}.
 
 | Value   | Description | DTLS-OK | Recommended | Reference      | Comment                         |
 |---------|-------------|---------|-------------|----------------|---------------------------------|
-| 0x0200  | MLKEM512    | Y       | N           | This document. | FIPS 203 version of ML-KEM-512  |
-| 0x0201  | MLKEM768    | Y       | N           | This document. | FIPS 203 version of ML-KEM-768  |
-| 0x0202  | MLKEM1024   | Y       | N           | This document. | FIPS 203 version of ML-KEM-1024 |
+| 0x0200  | MLKEM512    | Y       | N           | This document  | FIPS 203 version of ML-KEM-512  |
+| 0x0201  | MLKEM768    | Y       | N           | This document  | FIPS 203 version of ML-KEM-768  |
+| 0x0202  | MLKEM1024   | Y       | N           | This document  | FIPS 203 version of ML-KEM-1024 |
 
-As defined in {{Section 3 of RFC9847}}, the value N indicates:
+As defined in {{Section 3 of RFC9847}}, the value N:
 
-> That the item has not been evaluated by the IETF and that the IETF has made
+{: quote}
+> Indicates that the item has not been evaluated by the IETF and that the IETF has made
 > no statement about the suitability of the associated mechanism. This does
 > not necessarily mean that the mechanism is flawed, only that no consensus
 > exists. The IETF might have consensus to leave an item marked as "N" on the
