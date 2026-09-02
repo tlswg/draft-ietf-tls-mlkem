@@ -96,6 +96,7 @@ informative:
       name: Yutong Bian
   CZCJWH25:
     target: https://eprint.iacr.org/2025/1748.pdf
+    date: 2025
     title: "Post-Quantum {TLS} 1.3 Handshake from {CPA}-Secure {KEMs} with Tighter Reductions"
   DOWLING:
     target: https://doi.org/10.1007/s00145-021-09384-1
@@ -272,15 +273,16 @@ of RFC9846}}.
 This document defines standalone ML-KEM key establishment for TLS 1.3.  Use
 of KEMs for key agreement in TLS 1.3 has been analyzed in multiple settings
 and security models {{DOWLING}} {{KEMTLS}} {{HV22}} {{CHSW22}} {{CZCJWH25}}
-{{ZJZ24}}; ML-KEM's IND-CCA security exceeds the requirements for ephemeral
-key establishment {{GHS25}} {{RFC9846}}. Multiple formal analyses,
-including pen-and-paper computational proofs and machine-checked symbolic
-analysis using ProVerif {{KOBEISSI26}}, demonstrate that replacing
-Diffie-Hellman with an IND-CCA-secure KEM preserves the security properties
-of the TLS handshake. Formal analysis has also shown that hybrid key
-establishment (e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional
-security: the exchange remains secure as long as at least one of the
-component algorithms is unbroken {{BJ24}} {{CPWB25}}.
+{{ZJZ24}}; ML-KEM's IND-CCA security (Indistinguishability under
+Chosen-Ciphertext Attack) exceeds the requirements for ephemeral key
+establishment {{GHS25}} {{RFC9846}}. Multiple formal analyses, including
+pen-and-paper computational proofs and machine-checked symbolic analysis
+using ProVerif {{KOBEISSI26}}, demonstrate that replacing Diffie-Hellman with
+an IND-CCA-secure KEM preserves the security properties of the TLS
+handshake. Formal analysis has also shown that hybrid key establishment
+(e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional security: the
+exchange remains secure as long as at least one of the component algorithms
+is unbroken {{BJ24}} {{CPWB25}}.
 
 TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
 ciphertext as the `key_exchange` field of the `key_share` extension is
@@ -301,7 +303,7 @@ of these algorithms for general purposes.
 
 The disclosure of the output(s) of an insecure random number generator (RNG)
 when used in TLS and other protocols can be used in an attack to compromise
-the state of the insecure RNG itself as described in [DUALEC-TLS]. The
+the state of the insecure RNG itself as described in [DUALECTLS]. The
 encapsulation randomness in ML-KEM is an additional place where raw RNG
 output may be disclosed, therefore it is important to follow the RNG guidance
 in [FIPS203] and [RFC9846]. Implementers can choose to implement mechanisms
@@ -333,6 +335,6 @@ As defined in {{Section 3 of RFC9847}}, the value N:
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Douglas Stebila for consultation on the
-draft-ietf-tls-hybrid-design design, and to Scott Fluhrer, Eric Rescorla,
-John Preuß Mattsson, Martin Thomson, and Rebecca Guthrie for reviews.
+Thanks to Douglas Stebila for consultation on draft-ietf-tls-hybrid-design,
+and to Scott Fluhrer, Eric Rescorla, John Preuß Mattsson, Martin Thomson, and
+Rebecca Guthrie for reviews.
