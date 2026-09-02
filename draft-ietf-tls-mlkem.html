@@ -1382,8 +1382,9 @@ from <span>[<a href="#RFC8937" class="cite xref">RFC8937</a>]</span> for additio
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">This document requests/registers three new entries to the TLS Named Group (or
-Supported Group) registry, according to the procedures in <span><a href="https://rfc-editor.org/rfc/rfc9847#section-6" class="relref">Section 6</a> of [<a href="#RFC9847" class="cite xref">RFC9847</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This document requests/registers three new entries to the <a href="https://github.com/tlswg/draft-ietf-tls-ecdhe-mlkem">TLS Supported
+Groups registry</a>,
+according to the procedures in <span><a href="https://rfc-editor.org/rfc/rfc9847#section-6" class="relref">Section 6</a> of [<a href="#RFC9847" class="cite xref">RFC9847</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
         <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
 <thead>
@@ -1398,7 +1399,7 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
         </thead>
         <tbody>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x0200</td>
+            <td class="text-left" rowspan="1" colspan="1">512 (0x0200)</td>
             <td class="text-left" rowspan="1" colspan="1">MLKEM512</td>
             <td class="text-left" rowspan="1" colspan="1">Y</td>
             <td class="text-left" rowspan="1" colspan="1">N</td>
@@ -1406,7 +1407,7 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
             <td class="text-left" rowspan="1" colspan="1">FIPS 203 version of ML-KEM-512</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x0201</td>
+            <td class="text-left" rowspan="1" colspan="1">513 (0x0201)</td>
             <td class="text-left" rowspan="1" colspan="1">MLKEM768</td>
             <td class="text-left" rowspan="1" colspan="1">Y</td>
             <td class="text-left" rowspan="1" colspan="1">N</td>
@@ -1414,7 +1415,7 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
             <td class="text-left" rowspan="1" colspan="1">FIPS 203 version of ML-KEM-768</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x0202</td>
+            <td class="text-left" rowspan="1" colspan="1">514 (0x0202)</td>
             <td class="text-left" rowspan="1" colspan="1">MLKEM1024</td>
             <td class="text-left" rowspan="1" colspan="1">Y</td>
             <td class="text-left" rowspan="1" colspan="1">N</td>
@@ -1425,11 +1426,11 @@ Supported Group) registry, according to the procedures in <span><a href="https:/
       </table>
 <p id="section-6-3">As defined in <span><a href="https://rfc-editor.org/rfc/rfc9847#section-3" class="relref">Section 3</a> of [<a href="#RFC9847" class="cite xref">RFC9847</a>]</span>, the value N:<a href="#section-6-3" class="pilcrow">¶</a></p>
 <blockquote id="section-6-4">
-        <p id="section-6-4.1">Indicates that the item has not been evaluated by the IETF and that the IETF has made
-no statement about the suitability of the associated mechanism. This does
-not necessarily mean that the mechanism is flawed, only that no consensus
-exists. The IETF might have consensus to leave an item marked as "N" on the
-basis of the item having limited applicability or usage constraints.<a href="#section-6-4.1" class="pilcrow">¶</a></p>
+        <p id="section-6-4.1">Indicates that the item has not been evaluated by the IETF and that the
+IETF has made no statement about the suitability of the associated mechanism.
+This does not necessarily mean that the mechanism is flawed, only that no
+consensus exists. The IETF might have consensus to leave an item marked as
+"N" on the basis of the item having limited applicability or usage constraints.<a href="#section-6-4.1" class="pilcrow">¶</a></p>
 </blockquote>
 </section>
 </div>

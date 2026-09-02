@@ -246,25 +246,25 @@ Table of Contents
 
 6.  IANA Considerations
 
-   This document requests/registers three new entries to the TLS Named
-   Group (or Supported Group) registry, according to the procedures in
-   Section 6 of [RFC9847].
+   This document requests/registers three new entries to the TLS
+   Supported Groups registry (https://github.com/tlswg/draft-ietf-tls-
+   ecdhe-mlkem), according to the procedures in Section 6 of [RFC9847].
 
-   +======+=============+=======+=============+=========+=============+
-   |Value | Description |DTLS-OK| Recommended |Reference| Comment     |
-   +======+=============+=======+=============+=========+=============+
-   |0x0200| MLKEM512    |Y      | N           |This     | FIPS 203    |
-   |      |             |       |             |document | version of  |
-   |      |             |       |             |         | ML-KEM-512  |
-   +------+-------------+-------+-------------+---------+-------------+
-   |0x0201| MLKEM768    |Y      | N           |This     | FIPS 203    |
-   |      |             |       |             |document | version of  |
-   |      |             |       |             |         | ML-KEM-768  |
-   +------+-------------+-------+-------------+---------+-------------+
-   |0x0202| MLKEM1024   |Y      | N           |This     | FIPS 203    |
-   |      |             |       |             |document | version of  |
-   |      |             |       |             |         | ML-KEM-1024 |
-   +------+-------------+-------+-------------+---------+-------------+
+   +========+===========+=======+=============+=========+=============+
+   |Value   |Description|DTLS-OK| Recommended |Reference| Comment     |
+   +========+===========+=======+=============+=========+=============+
+   |512     |MLKEM512   |Y      | N           |This     | FIPS 203    |
+   |(0x0200)|           |       |             |document | version of  |
+   |        |           |       |             |         | ML-KEM-512  |
+   +--------+-----------+-------+-------------+---------+-------------+
+   |513     |MLKEM768   |Y      | N           |This     | FIPS 203    |
+   |(0x0201)|           |       |             |document | version of  |
+   |        |           |       |             |         | ML-KEM-768  |
+   +--------+-----------+-------+-------------+---------+-------------+
+   |514     |MLKEM1024  |Y      | N           |This     | FIPS 203    |
+   |(0x0202)|           |       |             |document | version of  |
+   |        |           |       |             |         | ML-KEM-1024 |
+   +--------+-----------+-------+-------------+---------+-------------+
 
                                  Table 1
 
