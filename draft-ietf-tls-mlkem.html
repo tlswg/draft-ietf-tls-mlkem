@@ -1352,7 +1352,7 @@ pen-and-paper computational proofs and machine-checked symbolic analysis
 using ProVerif <span>[<a href="#KOBEISSI26" class="cite xref">KOBEISSI26</a>]</span>, demonstrate that replacing Diffie-Hellman with
 an IND-CCA-secure KEM preserves the security properties of the TLS
 handshake. Formal analysis has also shown that hybrid key establishment
-(e.g., <span>[<a href="#HYBRID" class="cite xref">HYBRID</a>]</span>, <span>[<a href="#ECDHE-MLKEM" class="cite xref">ECDHE-MLKEM</a>]</span>) provides compositional security: the
+(e.g., <span>[<a href="#RFC9954" class="cite xref">RFC9954</a>]</span>, <span>[<a href="#RFC10024" class="cite xref">RFC10024</a>]</span>) provides compositional security: the
 exchange remains secure as long as at least one of the component algorithms
 is unbroken <span>[<a href="#BJ24" class="cite xref">BJ24</a>]</span> <span>[<a href="#CPWB25" class="cite xref">CPWB25</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">TLS 1.3's key schedule commits to the ML-KEM encapsulation key and the
@@ -1383,8 +1383,8 @@ from <span>[<a href="#RFC8937" class="cite xref">RFC8937</a>]</span> for additio
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">This document requests/registers three new entries to the <a href="https://github.com/tlswg/draft-ietf-tls-ecdhe-mlkem">TLS Supported
-Groups registry</a>,
+<p id="section-6-1">This document registers three new entries to the <a href="https://www.iana.org/assignments/tls-parameters#tls-parameters-8">TLS Supported Groups
+registry</a>,
 according to the procedures in <span><a href="https://rfc-editor.org/rfc/rfc9847#section-6" class="relref">Section 6</a> of [<a href="#RFC9847" class="cite xref">RFC9847</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
         <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
@@ -1499,10 +1499,6 @@ consensus exists. The IETF might have consensus to leave an item marked as
         <dd>
 <span class="refTitle">"On the Practical Exploitability of Dual EC in TLS Implementations"</span>, <time datetime="2014" class="refDate">2014</time>, <span>&lt;<a href="https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-checkoway.pdf">https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-checkoway.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="ECDHE-MLKEM">[ECDHE-MLKEM]</dt>
-        <dd>
-<span class="refAuthor">Kwiatkowski, K.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Westerbaan, B.</span>, and <span class="refAuthor">D. Stebila</span>, <span class="refTitle">"Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-ecdhe-mlkem-05</span>, <time datetime="2026-05-26" class="refDate">26 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-ecdhe-mlkem-05">https://datatracker.ietf.org/doc/html/draft-ietf-tls-ecdhe-mlkem-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="GHS25">[GHS25]</dt>
         <dd>
 <span class="refAuthor">Glabush, L.</span>, <span class="refAuthor">Hovelmanns, K.</span>, and <span class="refAuthor">D. Stebila</span>, <span class="refTitle">"On The Multi-target Security of Post-Quantum Key Encapsulation Mechanisms"</span>, <span class="seriesInfo">Cryptology ePrint Archive, Report 2025/343 </span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://eprint.iacr.org/2025/343.pdf">https://eprint.iacr.org/2025/343.pdf</a>&gt;</span>. </dd>
@@ -1510,10 +1506,6 @@ consensus exists. The IETF might have consensus to leave an item marked as
 <dt id="HV22">[HV22]</dt>
         <dd>
 <span class="refAuthor">Huguenin-Dumittan, L.</span> and <span class="refAuthor">S. Vaudenay</span>, <span class="refTitle">"On IND-qCCA Security in the ROM and Its Applications - CPA Security Is Sufficient for TLS 1.3"</span>, <span class="seriesInfo">Proceedings of Eurocrypt 2022 </span>, <span>n.d.</span>, <span>&lt;<a href="https://link.springer.com/chapter/10.1007/978-3-031-07082-2_22">https://link.springer.com/chapter/10.1007/978-3-031-07082-2_22</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="HYBRID">[HYBRID]</dt>
-        <dd>
-<span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-16</span>, <time datetime="2025-09-07" class="refDate">7 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="KEMTLS">[KEMTLS]</dt>
         <dd>
@@ -1539,6 +1531,14 @@ consensus exists. The IETF might have consensus to leave an item marked as
         <dd>
 <span class="refAuthor">Salowey, J.</span> and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"IANA Registry Updates for TLS and DTLS"</span>, <span class="seriesInfo">RFC 9847</span>, <span class="seriesInfo">DOI 10.17487/RFC9847</span>, <time datetime="2025-12" class="refDate">December 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9847">https://www.rfc-editor.org/rfc/rfc9847</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9954">[RFC9954]</dt>
+        <dd>
+<span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid Key Exchange in TLS 1.3"</span>, <span class="seriesInfo">RFC 9954</span>, <span class="seriesInfo">DOI 10.17487/RFC9954</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9954">https://www.rfc-editor.org/rfc/rfc9954</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC10024">[RFC10024]</dt>
+        <dd>
+<span class="refAuthor">Kwiatkowski, K.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Westerbaan, B. E.</span>, and <span class="refAuthor">D. Stebila</span>, <span class="refTitle">"Post-Quantum Traditional (PQ/T) Hybrid Key Agreement Mechanisms for TLS 1.3"</span>, <span class="seriesInfo">RFC 10024</span>, <span class="seriesInfo">DOI 10.17487/RFC10024</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc10024">https://www.rfc-editor.org/rfc/rfc10024</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ZJZ24">[ZJZ24]</dt>
       <dd>
 <span class="refAuthor">Zhou, B.</span>, <span class="refAuthor">Jiang, H.</span>, and <span class="refAuthor">Y. Zhao</span>, <span class="refTitle">"CPA-Secure KEMs are also Sufficient for Post-quantum TLS 1.3"</span>, <span class="seriesInfo">Proceedings of Asiacrypt 2024 </span>, <span>n.d.</span>, <span>&lt;<a href="https://doi.org/10.1007/978-981-96-0891-1_14">https://doi.org/10.1007/978-981-96-0891-1_14</a>&gt;</span>. </dd>
@@ -1553,9 +1553,9 @@ consensus exists. The IETF might have consensus to leave an item marked as
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">Thanks to Douglas Stebila for consultation on draft-ietf-tls-hybrid-design,
-and to Scott Fluhrer, Eric Rescorla, John Preuß Mattsson, Martin Thomson, and
-Rebecca Guthrie for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">Thanks to Douglas Stebila for consultation on RFC 9954's design, and to Scott
+Fluhrer, Eric Rescorla, John Preuß Mattsson, Martin Thomson, and Rebecca
+Guthrie for reviews.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
