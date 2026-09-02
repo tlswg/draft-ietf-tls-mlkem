@@ -309,24 +309,24 @@ from [RFC8937] for additional protection across sessions.
 
 # IANA Considerations
 
-This document requests/registers three new entries to the TLS Named Group (or
-Supported Group) registry, according to the procedures in {{Section 6 of
-RFC9847}}.
+This document requests/registers three new entries to the [TLS Supported
+Groups registry](https://github.com/tlswg/draft-ietf-tls-ecdhe-mlkem),
+according to the procedures in {{Section 6 of RFC9847}}.
 
-| Value   | Description | DTLS-OK | Recommended | Reference      | Comment                         |
-|---------|-------------|---------|-------------|----------------|---------------------------------|
-| 0x0200  | MLKEM512    | Y       | N           | This document  | FIPS 203 version of ML-KEM-512  |
-| 0x0201  | MLKEM768    | Y       | N           | This document  | FIPS 203 version of ML-KEM-768  |
-| 0x0202  | MLKEM1024   | Y       | N           | This document  | FIPS 203 version of ML-KEM-1024 |
+| Value         | Description | DTLS-OK | Recommended | Reference      | Comment                         |
+|---------------|-------------|---------|-------------|----------------|---------------------------------|
+| 512 (0x0200)  | MLKEM512    | Y       | N           | This document  | FIPS 203 version of ML-KEM-512  |
+| 513 (0x0201)  | MLKEM768    | Y       | N           | This document  | FIPS 203 version of ML-KEM-768  |
+| 514 (0x0202)  | MLKEM1024   | Y       | N           | This document  | FIPS 203 version of ML-KEM-1024 |
 
 As defined in {{Section 3 of RFC9847}}, the value N:
 
 {: quote}
-> Indicates that the item has not been evaluated by the IETF and that the IETF has made
-> no statement about the suitability of the associated mechanism. This does
-> not necessarily mean that the mechanism is flawed, only that no consensus
-> exists. The IETF might have consensus to leave an item marked as "N" on the
-> basis of the item having limited applicability or usage constraints.
+> Indicates that the item has not been evaluated by the IETF and that the
+> IETF has made no statement about the suitability of the associated mechanism.
+> This does not necessarily mean that the mechanism is flawed, only that no
+> consensus exists. The IETF might have consensus to leave an item marked as
+> "N" on the basis of the item having limited applicability or usage constraints.
 
 --- back
 
