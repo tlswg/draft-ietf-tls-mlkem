@@ -107,7 +107,6 @@ informative:
     title: "On the Practical Exploitability of Dual EC in TLS Implementations"
     target: https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-checkoway.pdf
     date: 2014
-  ECDHE-MLKEM: I-D.ietf-tls-ecdhe-mlkem
   GHS25:
     target: https://eprint.iacr.org/2025/343.pdf
     title: "On The Multi-target Security of Post-Quantum Key Encapsulation Mechanisms"
@@ -129,7 +128,6 @@ informative:
       name: Loïs Huguenin-Dumittan
     -
       name: Serge Vaudenay
-  HYBRID: I-D.ietf-tls-hybrid-design
   KOBEISSI26:
     target: "https://eprint.iacr.org/2026/1147.pdf"
     title: "FATT Chance: On the Robustness of Standalone and Hybrid ML-KEM Key Exchange in TLS 1.3"
@@ -138,6 +136,8 @@ informative:
   RFC8937:
   RFC9794:
   RFC9847:
+  RFC9954:
+  RFC10024:
   ZJZ24:
     target: https://doi.org/10.1007/978-981-96-0891-1_14
     title: "CPA-Secure KEMs are also Sufficient for Post-quantum TLS 1.3"
@@ -280,7 +280,7 @@ pen-and-paper computational proofs and machine-checked symbolic analysis
 using ProVerif {{KOBEISSI26}}, demonstrate that replacing Diffie-Hellman with
 an IND-CCA-secure KEM preserves the security properties of the TLS
 handshake. Formal analysis has also shown that hybrid key establishment
-(e.g., {{HYBRID}}, {{ECDHE-MLKEM}}) provides compositional security: the
+(e.g., {{RFC9954}}, {{RFC10024}}) provides compositional security: the
 exchange remains secure as long as at least one of the component algorithms
 is unbroken {{BJ24}} {{CPWB25}}.
 
@@ -311,8 +311,8 @@ from [RFC8937] for additional protection across sessions.
 
 # IANA Considerations
 
-This document requests/registers three new entries to the [TLS Supported
-Groups registry](https://github.com/tlswg/draft-ietf-tls-ecdhe-mlkem),
+This document registers three new entries to the [TLS Supported Groups
+registry](https://www.iana.org/assignments/tls-parameters#tls-parameters-8),
 according to the procedures in {{Section 6 of RFC9847}}.
 
 | Value         | Description | DTLS-OK | Recommended | Reference      | Comment                         |
@@ -335,6 +335,6 @@ As defined in {{Section 3 of RFC9847}}, the value N:
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Douglas Stebila for consultation on draft-ietf-tls-hybrid-design,
-and to Scott Fluhrer, Eric Rescorla, John Preuß Mattsson, Martin Thomson, and
-Rebecca Guthrie for reviews.
+Thanks to Douglas Stebila for consultation on RFC 9954's design, and to Scott
+Fluhrer, Eric Rescorla, John Preuß Mattsson, Martin Thomson, and Rebecca
+Guthrie for reviews.
